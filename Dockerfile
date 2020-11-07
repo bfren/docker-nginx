@@ -9,6 +9,9 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 EXPOSE 80
 EXPOSE 443
 
+ENV UID=1000
+ENV GID=1000
+
 RUN apk update && \
     apk upgrade && \
     apk add nginx certbot && \
