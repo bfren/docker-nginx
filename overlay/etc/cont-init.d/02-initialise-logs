@@ -1,0 +1,8 @@
+#!/usr/bin/execlineb -P
+
+#======================================================================================================================
+# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/cont-init.d/00-initialize-logfifos
+#======================================================================================================================
+
+if { logutil-newfifo /var/run/s6/nginx-access-log-fifo }
+if { logutil-newfifo /var/run/s6/nginx-error-log-fifo }
