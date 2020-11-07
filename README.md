@@ -1,2 +1,2 @@
 # docker-nginx
-Nginx + Certbot
+Nginx
