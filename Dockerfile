@@ -8,11 +8,8 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 
 EXPOSE 80
 
-ENV UID=1000
-ENV GID=1000
-
-RUN addgroup --gid ${GID} www && \
-    adduser --uid ${UID} --no-create-home --disabled-password --ingroup www www && \
+RUN addgroup --gid 1000 www && \
+    adduser --uid 1000 --no-create-home --disabled-password --ingroup www www && \
     apk update && \
     apk upgrade && \
     apk add nginx ca-certificates && \
