@@ -14,7 +14,7 @@ ENV GID=1000
 
 RUN apk update && \
     apk upgrade && \
-    apk add nginx certbot && \
+    apk add nginx ca-certificates certbot && \
     rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/*
 
 COPY ./overlay /
@@ -24,3 +24,5 @@ VOLUME [ "/www", "/etc/nginx/conf.d", "/etc/nginx/modules", "/etc/nginx/sites" ]
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "/usr/bin/healthcheck" ]
 
 RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
+
+CMD [ "nginx" ]
