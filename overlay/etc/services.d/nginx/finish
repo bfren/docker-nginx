@@ -1,4 +1,4 @@
-#!/usr/bin/execlineb -P
+#!/bin/bash
 
 #======================================================================================================================
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx/finish
