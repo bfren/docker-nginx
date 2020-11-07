@@ -14,7 +14,7 @@ ENV GID=1000
 
 RUN apk update && \
     apk upgrade && \
-    apk add nginx ca-certificates certbot && \
+    apk add nginx ca-certificates certbot curl && \
     rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* && \
     mkdir -p /var/run/nginx
 
