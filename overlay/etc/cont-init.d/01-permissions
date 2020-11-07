@@ -1,3 +1,9 @@
 #!/bin/bash
 
 chmod +x /usr/bin/healthcheck
+
+chown -R www:www 
+chmod -R u+rw,go= /etc/nginx /var/lib/nginx /www
+
+chown nobody,32768:32768 /var/log/nginx-access-logs /var/log/nginx-error-logs
+chmod u+rwx,og+rw /var/log/nginx-access-logs /var/log/nginx-error-logs
