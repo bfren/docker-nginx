@@ -16,7 +16,7 @@ RUN apk update && \
     apk upgrade && \
     apk add nginx ca-certificates certbot && \
     rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* && \
-    mkdir /run/nginx
+    mkdir -p /var/run/nginx
 
 COPY ./overlay /
 
