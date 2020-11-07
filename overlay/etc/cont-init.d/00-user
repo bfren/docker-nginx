@@ -1,4 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-addgroup --system --gid $GID www
-adduser -D --ingroup "www" --uid $UID www
