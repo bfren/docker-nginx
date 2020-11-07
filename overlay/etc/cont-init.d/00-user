@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv bash
 
-addgroup --gid "$GID" --system www
+UID=${UID:-1000}
+GID=${GID:-1000}
 
-adduser -D --ingroup 'www' --uid "$UID" www
-
+addgroup --system --gid $GID www
+adduser -D --ingroup "www" --uid $UID www
