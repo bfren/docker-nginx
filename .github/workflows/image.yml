@@ -12,6 +12,18 @@ jobs:
         name: Checkout code
         uses: actions/checkout@v2
       -
+        name: Read Nginx major version
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./NGINX_MAJOR
+        id: nginx_major
+      -
+        name: Read Nginx minor version
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./NGINX_MINOR
+        id: nginx_minor
+      -
         name: Read version
         uses: bencgreen/read-file-action@v1
         with:
@@ -38,6 +50,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
           tags: |
             bcgdesign/nginx:latest
+            bcgdesign/nginx:${{ steps.nginx_major.outputs.content }}
+            bcgdesign/nginx:${{ steps.nginx_minor.outputs.content }}
             bcgdesign/nginx:${{ steps.version.outputs.content }}
       -
         name: Image digest

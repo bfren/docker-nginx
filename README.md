@@ -12,10 +12,10 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Volumes
 
-* /www - these files will be served by Nginx
-* /etc/nginx/conf.d - custom Nginx configuration
-* /etc/nginx/modules - Nginx modules
-* /etc/nginx/sites - server definitions
+* `/www` - these files will be served by Nginx
+* `/etc/nginx/conf.d` - custom Nginx configuration
+* `/etc/nginx/modules` - Nginx modules
+* `/etc/nginx/sites` - server definitions
 
 ## Authors
 
@@ -27,4 +27,5 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Copyright
 
-> Copyright (c) 2020 Ben Green <https://bcgdesign.com>
+> Copyright (c) 2020 Ben Green <https://bcgdesign.com>  
+> Unless otherwise stated

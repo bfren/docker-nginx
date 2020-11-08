@@ -8,13 +8,17 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 
 EXPOSE 80
 
-RUN addgroup --gid 1000 www && \
-    adduser --uid 1000 --no-create-home --disabled-password --ingroup www www && \
-    apk update && \
-    apk upgrade && \
-    apk add nginx ca-certificates && \
-    rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* && \
-    mkdir -p /var/run/nginx
+ARG NGINX_VERSION="1.18.0-r8"
+
+RUN addgroup --gid 1000 www \
+    && adduser --uid 1000 --no-create-home --disabled-password --ingroup www www \
+    && apk update \
+    && apk upgrade \
+    && apk add \
+        nginx=${NGINX_VERSION} \
+        ca-certificates \
+    && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* \
+    && mkdir -p /var/run/nginx
 
 COPY ./overlay /
 
