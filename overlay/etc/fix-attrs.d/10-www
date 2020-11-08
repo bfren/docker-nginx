@@ -1,3 +1,4 @@
 /etc/nginx true www:www 0600 0700
 /var/lib/nginx true www:www 0600 0700
 /www true www:www 0600 0700
+/www-well-known true www:www 0600 0700
