@@ -28,4 +28,4 @@ VOLUME [ "/www", "/etc/nginx/conf.d", "/etc/nginx/modules", "/etc/nginx/sites" ]
 RUN chmod +x /usr/bin/healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "/usr/bin/healthcheck" ]
 
-RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
+#RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
