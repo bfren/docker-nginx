@@ -1,13 +1,5 @@
 server {
-    listen                          80;
-
-    root                            /www;
+    include                         helpers/base.conf;
     index                           index.html index.htm;
-
-    add_header                      X-Clacks-Overhead "GNU Terry Pratchett";
-
-    error_page                      500 502 503 504  /50x.html;
-    location = /50x.html {
-        root                        /var/lib/nginx/html;
-    }
+    include                         helpers/nginx_error_pages.conf;
 }
