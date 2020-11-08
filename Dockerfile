@@ -8,9 +8,10 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 
 EXPOSE 80
 
-ARG NGINX_VERSION="1.18.0-r8"
-
-RUN addgroup --gid 1000 www \
+COPY ./VERSION /tmp/VERSION
+RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
+    && echo "Nginx v${NGINX_VERSION}" \
+    && addgroup --gid 1000 www \
     && adduser --uid 1000 --no-create-home --disabled-password --ingroup www www \
     && apk update \
     && apk upgrade \
