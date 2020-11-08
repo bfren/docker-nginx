@@ -18,7 +18,7 @@ RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
     && apk add \
         nginx=${NGINX_VERSION} \
         ca-certificates \
-    && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* \
+    && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* /tmp/* \
     && mkdir -p /var/run/nginx
 
 COPY ./overlay /
