@@ -24,6 +24,12 @@ jobs:
           path: ./NGINX_MINOR
         id: nginx_minor
       -
+        name: Read Nginx revision version
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./NGINX_REVISION
+        id: nginx_revision
+      -
         name: Read version
         uses: bencgreen/read-file-action@v1
         with:
@@ -52,6 +58,7 @@ jobs:
             bcgdesign/nginx:latest
             bcgdesign/nginx:${{ steps.nginx_major.outputs.content }}
             bcgdesign/nginx:${{ steps.nginx_minor.outputs.content }}
+            bcgdesign/nginx:${{ steps.nginx_revision.outputs.content }}
             bcgdesign/nginx:${{ steps.version.outputs.content }}
       -
         name: Image digest
