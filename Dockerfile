@@ -13,8 +13,7 @@ RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
     && echo "Nginx v${NGINX_VERSION}" \
     && addgroup --gid 1000 www \
     && adduser --uid 1000 --no-create-home --disabled-password --ingroup www www \
-    && apk update \
-    && apk upgrade \
+    && apk -U upgrade \
     && apk add \
         nginx=${NGINX_VERSION} \
         ca-certificates \
