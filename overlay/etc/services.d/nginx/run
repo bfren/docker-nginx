@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 #======================================================================================================================
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx/run
