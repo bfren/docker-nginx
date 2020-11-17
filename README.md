@@ -12,10 +12,7 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Volumes
 
-* `/var/www` - these files will be served by Nginx
-* `/etc/nginx/conf.d` - custom Nginx configuration
-* `/etc/nginx/modules` - Nginx modules
-* `/etc/nginx/sites` - Nginx sites (this image is designed to be used behind a reverse proxy so I suggest leaving this as the default unless you really know what you're doing)
+* `/www` - these files will be served by Nginx (by default there is a 'Welcome to Nginx' message served)
 
 ## Authors
 
