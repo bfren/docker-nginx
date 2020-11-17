@@ -25,7 +25,7 @@ RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
 
 COPY ./overlay /
 
-RUN ln -s /var/www/localhost /www
+RUN ln -s /www /var/www/localhost
 VOLUME [ "/www" ]
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
