@@ -1,5 +1,5 @@
 server {
     include                         helpers/base.conf;
     index                           index.html index.htm;
-    include                         helpers/nginx_error_pages.conf;
+    include                         helpers/nginx-error-pages.conf;
 }
