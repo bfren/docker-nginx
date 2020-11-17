@@ -17,12 +17,13 @@ RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
     && apk add \
         nginx=${NGINX_VERSION} \
         ca-certificates \
-    && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* /tmp/* \
+    && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* /var/www/* /tmp/* \
     && mkdir -p /var/run/nginx
 
 COPY ./overlay /
 
-VOLUME [ "/www", "/etc/nginx/conf.d", "/etc/nginx/modules", "/etc/nginx/sites" ]
+RUN ln -s /www /var/www/html
+VOLUME [ "/www" ]
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
 
