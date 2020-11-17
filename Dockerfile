@@ -6,6 +6,9 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
+# fix for creating S6-compatible Nginx logs
+RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
+
 EXPOSE 80
 
 COPY ./VERSION /tmp/VERSION
@@ -21,10 +24,8 @@ RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
     && mkdir -p /var/run/nginx
 
 RUN mkdir -p /var/www/html && ln -s /var/www/html /www
-VOLUME [ "/www" ]
-
 COPY ./overlay /
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
+VOLUME [ "/www" ]
 
-RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
