@@ -20,10 +20,10 @@ RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
     && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* /var/www/* /tmp/* \
     && mkdir -p /var/run/nginx
 
-COPY ./overlay /
-
-RUN ln -s /var/www/html /www
+RUN mkdir -p /var/www/html && ln -s /var/www/html /www
 VOLUME [ "/www" ]
+
+COPY ./overlay /
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
 
