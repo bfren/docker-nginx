@@ -1,4 +1,4 @@
-FROM bcgdesign/alpine-s6:1.0.5
+FROM bcgdesign/alpine-s6:1.0.6
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.name="Nginx" \
@@ -18,7 +18,7 @@ RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
     && adduser --uid 1000 --no-create-home --disabled-password --ingroup www www \
     && apk -U upgrade \
     && apk add \
-        nginx=${NGINX_VERSION} \
+        nginx@edgemain=${NGINX_VERSION} \
         ca-certificates \
     && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* /var/www/* /tmp/* \
     && mkdir -p /var/run/nginx

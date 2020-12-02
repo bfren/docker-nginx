@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/usr/bin/with-contenv sh
 
 #======================================================================================================================
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx-access-log/run
 #======================================================================================================================
 
-echo " - starting Nginx access log"
+_echo "starting Nginx access log"
 logutil-service -f /var/run/s6/nginx-access-log-fifo /var/log/nginx-access-logs
