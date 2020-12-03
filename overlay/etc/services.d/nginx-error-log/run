@@ -4,5 +4,5 @@
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx-error-log/run
 #======================================================================================================================
 
-_echo "starting Nginx error log"
+_echo "Starting Nginx error log"
 logutil-service -f /var/run/s6/nginx-error-log-fifo /var/log/nginx-error-logs

@@ -4,5 +4,5 @@
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx/run
 #======================================================================================================================
 
-_echo "starting Nginx"
+_echo "Starting Nginx"
 nginx -g "daemon off;"
