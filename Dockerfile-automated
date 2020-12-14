@@ -18,8 +18,8 @@ RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
     && adduser --uid 1000 --no-create-home --disabled-password --ingroup www www \
     && apk -U upgrade \
     && apk add \
-        nginx=${NGINX_VERSION} \
         ca-certificates \
+        nginx=${NGINX_VERSION} \
     && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* /var/www/* /tmp/* \
     && mkdir -p /var/run/nginx
 
