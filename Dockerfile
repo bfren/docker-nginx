@@ -11,8 +11,8 @@ RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
 
 EXPOSE 80
 
-COPY ./VERSION /tmp/VERSION
-RUN export NGINX_VERSION=$(cat /tmp/VERSION) \
+COPY ./NGINX_BUILD /tmp/NGINX_BUILD
+RUN export NGINX_VERSION=$(cat /tmp/NGINX_BUILD) \
     && echo "Nginx v${NGINX_VERSION}" \
     && addgroup --gid 1000 www \
     && adduser --uid 1000 --no-create-home --disabled-password --ingroup www www \
