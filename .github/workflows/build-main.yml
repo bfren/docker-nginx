@@ -22,19 +22,25 @@ jobs:
           path: ./NGINX_MAJOR
         id: nginx_major
       -
-        name: Read Nginx minor version
+        name: Read Nginx version - minor
         uses: bencgreen/read-file-action@v1
         with:
           path: ./NGINX_MINOR
         id: nginx_minor
       -
-        name: Read Nginx revision version
+        name: Read Nginx version - revision
         uses: bencgreen/read-file-action@v1
         with:
           path: ./NGINX_REVISION
         id: nginx_revision
       -
-        name: Read version
+        name: Read Nginx version - build
+        uses: bencgreen/read-file-action@v1
+        with:
+          path: ./NGINX_BUILD
+        id: nginx_build
+      -
+        name: Read image version
         uses: bencgreen/read-file-action@v1
         with:
           path: ./VERSION
@@ -60,10 +66,11 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bcgdesign/nginx:latest
-            bcgdesign/nginx:${{ steps.nginx_major.outputs.content }}
-            bcgdesign/nginx:${{ steps.nginx_minor.outputs.content }}
-            bcgdesign/nginx:${{ steps.nginx_revision.outputs.content }}
             bcgdesign/nginx:${{ steps.version.outputs.content }}
+            bcgdesign/nginx:nginx-${{ steps.nginx_major.outputs.content }}
+            bcgdesign/nginx:nginx-${{ steps.nginx_minor.outputs.content }}
+            bcgdesign/nginx:nginx-${{ steps.nginx_revision.outputs.content }}
+            bcgdesign/nginx:nginx-${{ steps.nginx_build.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
