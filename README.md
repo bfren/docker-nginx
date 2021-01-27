@@ -24,5 +24,5 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Copyright
 
-> Copyright (c) 2020 Ben Green <https://bcgdesign.com>  
+> Copyright (c) 2021 Ben Green <https://bcgdesign.com>  
 > Unless otherwise stated
