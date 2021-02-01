@@ -12,7 +12,9 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Volumes
 
-* `/www` - these files will be served by Nginx (by default there is a 'Welcome to Nginx' message served)
+| Volume | Purpose                                                                                                      |
+| ------ | ------------------------------------------------------------------------------------------------------------ |
+| `/www` | Files in this directory will be served by Nginx (if not mapped, a 'Welcome to Nginx' message will be served) |
 
 ## Authors
 
