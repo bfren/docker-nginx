@@ -1,8 +1,8 @@
-FROM bcgdesign/alpine-s6:auto
+FROM bcgdesign/alpine-s6:alpine-3.12-1.2.1
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.name="Nginx" \
-    org.label-schema.version="latest" \
+    org.label-schema.version="Alpine 3.12" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
@@ -11,7 +11,7 @@ RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
 
 EXPOSE 80
 
-COPY ./alpine-3.13/NGINX_BUILD /tmp/NGINX_BUILD
+COPY ./alpine-3.12/NGINX_BUILD /tmp/NGINX_BUILD
 RUN export NGINX_VERSION=$(cat /tmp/NGINX_BUILD) \
     && echo "Nginx v${NGINX_VERSION}" \
     && addgroup --gid 1000 www \
@@ -20,7 +20,7 @@ RUN export NGINX_VERSION=$(cat /tmp/NGINX_BUILD) \
     && apk add \
         ca-certificates \
         nginx=${NGINX_VERSION} \
-    && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/http.d/* /var/www/* /tmp/* \
+    && rm -rf /var/cache/apk/* /etc/nginx/nginx.conf /etc/nginx/conf.d/* /var/www/* /tmp/* \
     && mkdir -p /var/run/nginx
 
 COPY ./overlay /

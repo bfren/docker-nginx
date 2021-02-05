@@ -1,4 +1,4 @@
-name: build-main
+name: alpine-3.13-main
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     tags-ignore:
       - '**'
     paths:
-      - '.github/workflows/build-main.yml'
+      - '.github/workflows/build_alpine_3_13-main.yml'
+      - 'alpine-3.13/**'
       - 'overlay/**'
       - 'VERSION'
 
@@ -18,30 +19,6 @@ jobs:
       -
         name: Checkout code
         uses: actions/checkout@v2
-      -
-        name: Read Nginx major version
-        uses: bencgreen/read-file-action@v1
-        with:
-          path: ./NGINX_MAJOR
-        id: nginx_major
-      -
-        name: Read Nginx version - minor
-        uses: bencgreen/read-file-action@v1
-        with:
-          path: ./NGINX_MINOR
-        id: nginx_minor
-      -
-        name: Read Nginx version - revision
-        uses: bencgreen/read-file-action@v1
-        with:
-          path: ./NGINX_REVISION
-        id: nginx_revision
-      -
-        name: Read Nginx version - build
-        uses: bencgreen/read-file-action@v1
-        with:
-          path: ./NGINX_BUILD
-        id: nginx_build
       -
         name: Read image version
         uses: bencgreen/read-file-action@v1
@@ -56,7 +33,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       -
         name: Login to DockerHub
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -65,15 +42,15 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
+          context: .
+          file: ./alpine-3.13/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bcgdesign/nginx:latest
             bcgdesign/nginx:${{ steps.version.outputs.content }}
-            bcgdesign/nginx:nginx-${{ steps.nginx_major.outputs.content }}
-            bcgdesign/nginx:nginx-${{ steps.nginx_minor.outputs.content }}
-            bcgdesign/nginx:nginx-${{ steps.nginx_revision.outputs.content }}
-            bcgdesign/nginx:nginx-${{ steps.nginx_build.outputs.content }}
+            bcgdesign/nginx:alpine-3.13
+            bcgdesign/nginx:alpine-3.13-${{ steps.version.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
