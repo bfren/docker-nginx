@@ -1,8 +1,15 @@
 #!/usr/bin/with-contenv sh
 
+set -e
+
+
 #======================================================================================================================
-# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx-error-log/run
+# Forward nginx error log to Docker
 #======================================================================================================================
 
-_echo "Starting Nginx error log"
-logutil-service -f /var/run/s6/nginx-error-log-fifo /var/log/nginx-error-logs
+if [[ -e /var/log/nginx/error.log ]]; then
+    _echo "Forwarding Nginx error log to docker"
+    exec tail -F /var/log/nginx/error.log
+else
+    exec sleep 10
+fi
