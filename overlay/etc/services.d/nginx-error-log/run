@@ -1,8 +1,16 @@
 #!/usr/bin/with-contenv sh
 
+set -euo pipefail
+
+
 #======================================================================================================================
-# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx-error-log/run
+# Forward nginx error log to Docker
 #======================================================================================================================
 
-_echo "Starting Nginx error log"
-logutil-service -f /var/run/s6/nginx-error-log-fifo /var/log/nginx-error-logs
+if [[ -e /var/log/nginx/error.log ]]; then
+    _echo "Forwarding Nginx error log to docker"
+    exec tail --follow=name --retry /var/log/nginx/error.log
+else
+    # wait for Nginx service to start and create log file
+    exec sleep 5
+fi
