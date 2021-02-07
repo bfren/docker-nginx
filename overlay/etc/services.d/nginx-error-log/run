@@ -4,14 +4,7 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Forward nginx error log to Docker
+# Forward Nginx error log to Docker
 #======================================================================================================================
 
-if [[ -e /var/log/nginx/error.log ]]; then
-    _echo "Forwarding Nginx error log to docker"
-    # -F = follow and keep retrying
-    exec tail -F /var/log/nginx/error.log
-else
-    # wait for Nginx service to start and create log file
-    exec sleep 5
-fi
+_forward "nginx-error-log" "/var/log/nginx/error.log"
