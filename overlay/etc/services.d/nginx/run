@@ -5,7 +5,11 @@ set -euo pipefail
 
 #======================================================================================================================
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx/run
+#   -q  suppress non-error messages during testing
+#   -t  test Nginx configuration file(s)
+#   -g  set global configuration directive
 #======================================================================================================================
 
-_echo "Starting Nginx"
-nginx -g "daemon off;"
+VERSION=$(nginx -v)
+_echo "Starting Nginx ${VERSION}"
+nginx -g "daemon off;" > /dev/null 2>&1
