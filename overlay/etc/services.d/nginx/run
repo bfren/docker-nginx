@@ -11,4 +11,4 @@ set -euo pipefail
 #======================================================================================================================
 
 _echo "Starting Nginx"
-nginx -g "daemon off;" > /dev/null 2>&1
+nginx -g "daemon off;" > /dev/null 2>&1 # send to /dev/null because the log forwarder will show any startup errors
