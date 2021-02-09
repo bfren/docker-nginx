@@ -32,15 +32,15 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Nginx Configuration Helpers
 
-The image contains a handful of useful Nginx configuration 'helper' files, which you can find in `/overlay/etc/nginx/helpers`.
+The image contains a handful of useful Nginx configuration 'helper' files, which you can find in `/overlay/etc/nginx/helpers`.  They all begin with the prefix 'nginx':
 
-| Helper                   | Description                                                                                                                         |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `base.conf`              | Basic configuration, sets listen port, document root, and adds the [GNU Terry Pratchett](http://www.gnuterrypratchett.com/) header. |
-| `ignore-favicon.conf`    | Returns 204 for favicon.ico requests that do not exist, and stops it being added to the error log.                                  |
-| `nginx-error-pages.conf` | Include if you want to use Nginx's default error pages.                                                                             |
-| `static-files.conf`      | Sets useful headers, cache, and expiration values for serving static files.                                                         |
-| `uploads.conf`           | Sets `client_max_body_size` to 0 - so there is no limit on file upload size.                                                        |
+| Helper                 | Description                                                                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `-base.conf`           | Basic configuration, sets listen port, document root, and adds the [GNU Terry Pratchett](http://www.gnuterrypratchett.com/) header. |
+| `-ignore-favicon.conf` | Returns 204 for favicon.ico requests that do not exist, and stops it being added to the error log.                                  |
+| `-error-pages.conf`    | Include if you want to use Nginx's default error pages.                                                                             |
+| `-static-files.conf`   | Sets useful headers, cache, and expiration values for serving static files.                                                         |
+| `-uploads.conf`        | Sets `client_max_body_size` to 0 - so there is no limit on file upload size.                                                        |
 
 ## Authors
 
