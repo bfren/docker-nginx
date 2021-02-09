@@ -26,9 +26,9 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Helper Functions
 
-| Function       | Arguments | Description                                                            |
-| -------------- | --------- | ---------------------------------------------------------------------- |
-| `nginx-reload` | *None*    | Tests Nginx configuration and if successful, reloads the Nginx server. |
+| Function       | Arguments | Description                                                            | Usage                                    |
+| -------------- | --------- | ---------------------------------------------------------------------- | ---------------------------------------- |
+| `nginx-reload` | *None*    | Tests Nginx configuration and if successful, reloads the Nginx server. | `docker exec <<CONTAINER>> nginx-reload` |
 
 ## Nginx Configuration Helpers
 
