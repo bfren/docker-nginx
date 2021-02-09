@@ -10,6 +10,5 @@ set -euo pipefail
 #   -g  set global configuration directive
 #======================================================================================================================
 
-VERSION=$(nginx -v)
-_echo "Starting Nginx ${VERSION}"
+_echo "Starting Nginx"
 nginx -g "daemon off;" > /dev/null 2>&1
