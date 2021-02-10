@@ -7,4 +7,4 @@ set -euo pipefail
 # Forward Nginx error log to Docker
 #======================================================================================================================
 
-_forward "nginx-error-log" "/var/log/nginx/error.log"
+bcg-forward "nginx-error-log" "/var/log/nginx/error.log"

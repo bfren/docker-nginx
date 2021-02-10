@@ -11,7 +11,7 @@ set -euo pipefail
 #======================================================================================================================
 
 if [ ! -z "$(pidof nginx)" ] ; then
-    _echo "Reloading nginx..."
+    bcg-echo "Reloading nginx..."
     nginx -qt && nginx -s reload
-    _done
+    bcg-done
 fi
