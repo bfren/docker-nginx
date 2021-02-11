@@ -20,9 +20,9 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Volumes
 
-| Volume | Purpose                                                                                                      |
-| ------ | ------------------------------------------------------------------------------------------------------------ |
-| `/www` | Files in this directory will be served by Nginx (if not mapped, a 'Welcome to Nginx' message will be served) |
+| Volume | Purpose                                                                                                       |
+| ------ | ------------------------------------------------------------------------------------------------------------- |
+| `/www` | Files in this directory will be served by Nginx (if not mapped, a 'Welcome to Nginx' message will be served). |
 
 ## Helper Functions
 
