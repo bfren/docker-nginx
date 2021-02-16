@@ -1,4 +1,4 @@
-FROM bcgdesign/alpine-s6:alpine-3.12-1.4.1
+FROM bcgdesign/alpine-s6:alpine-3.12-1.5.0
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.name="Nginx" \
@@ -14,7 +14,7 @@ EXPOSE 80
 COPY ./overlay /
 COPY ./alpine-3.12/NGINX_BUILD /tmp/NGINX_BUILD
 
-RUN chmod +x /tmp/install && /tmp/install && bcg-clear
+RUN bcg-install
 
 VOLUME [ "/www" ]
 
