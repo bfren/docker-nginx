@@ -21,6 +21,7 @@ bcg-echo "Installing Nginx v${NGINX_VERSION}..."
 apk add --no-cache \
     ca-certificates \
     nginx=${NGINX_VERSION}
+mkdir -p /var/run/nginx
 bcg-done
 
 
