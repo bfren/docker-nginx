@@ -4,7 +4,9 @@ set -euo pipefail
 
 
 #======================================================================================================================
-# Reload Nginx - but only if it is running
+# Reload Nginx - but only if it is running.
+#
+# Nginx flags:
 #   -q  suppress non-error messages during testing
 #   -t  test Nginx configuration file(s)
 #   -s  send a signal to the master process (reload: reload configuration, start new worker process, shut down old one)
