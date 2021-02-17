@@ -7,7 +7,7 @@ set -euo pipefail
 # Start Nginx as a foreground service.
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx/run.
 #
-# Nginx flags:
+# Nginx flags
 #   -q  suppress non-error messages during testing
 #   -t  test Nginx configuration file(s)
 #   -g  set global configuration directive

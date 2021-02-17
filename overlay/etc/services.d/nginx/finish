@@ -6,7 +6,7 @@ set -euo pipefail
 #======================================================================================================================
 # Ensure Nginx is closed gracefully and use base executable to terminate all services.
 #
-# Nginx flags:
+# Nginx flags
 #   -s  send a signal to the master process (quit: shut down server gracefully)
 #======================================================================================================================
 
