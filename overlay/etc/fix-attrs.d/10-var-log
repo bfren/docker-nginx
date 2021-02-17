@@ -1,2 +1,0 @@
-/var/log/nginx-access-logs false 65534:65533 0755 2700
-/var/log/nginx-error-logs false 65534:65533 0755 2700
