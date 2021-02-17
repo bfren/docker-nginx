@@ -17,5 +17,3 @@ COPY ./alpine-3.13/NGINX_BUILD /tmp/NGINX_BUILD
 RUN bcg-install
 
 VOLUME [ "/www" ]
-
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=5 CMD [ "healthcheck" ]
