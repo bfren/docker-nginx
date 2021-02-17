@@ -2,14 +2,15 @@ name: alpine-3.12-dev
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'main'
     tags-ignore:
       - '**'
     paths:
       - '.github/workflows/build_alpine_3_12-dev.yml'
       - 'alpine-3.12/**'
       - 'overlay/**'
+      - 'VERSION'
 
 jobs:
   main:
