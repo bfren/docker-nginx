@@ -13,14 +13,23 @@ bcg-done
 
 
 #======================================================================================================================
+# Get Nginx Version.
+#======================================================================================================================
+
+cd /tmp
+
+V=$(cat VERSION)
+bcg-debug "install: Nginx version ${V}."
+
+
+#======================================================================================================================
 # Install Nginx and dependencies.
 #======================================================================================================================
 
-NGINX_VERSION=$(cat /tmp/NGINX_BUILD)
-bcg-echo "Installing Nginx v${NGINX_VERSION}..."
+bcg-echo "Installing Nginx v${VERSION}..."
 apk add --no-cache \
     ca-certificates \
-    nginx=${NGINX_VERSION}
+    nginx=${VERSION}
 mkdir -p /var/run/nginx
 bcg-done
 

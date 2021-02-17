@@ -12,7 +12,7 @@ RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
 EXPOSE 80
 
 COPY ./overlay /
-COPY ./alpine-3.12/NGINX_BUILD /tmp/NGINX_BUILD
+COPY ./alpine-3.12/NGINX_BUILD /tmp/VERSION
 
 RUN bcg-install
 
