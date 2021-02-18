@@ -11,5 +11,7 @@ export BCG_E="nginx/$(basename ${0})"
 #   -s  send a signal to the master process (quit: shut down server gracefully)
 #======================================================================================================================
 
+bcg-debug "Quitting Nginx."
 nginx -s quit
+
 bcg-svc-terminate
