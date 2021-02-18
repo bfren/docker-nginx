@@ -18,8 +18,8 @@ bcg-done
 
 cd /tmp
 
-V=$(cat VERSION)
-bcg-debug "install: Nginx version ${V}."
+VERSION=$(cat VERSION)
+bcg-debug "install" "Nginx version ${VERSION}."
 
 
 #======================================================================================================================
