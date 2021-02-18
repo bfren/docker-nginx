@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv sh
 
 set -euo pipefail
+export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
@@ -16,4 +17,6 @@ if [ ! -z "$(pidof nginx)" ] ; then
     bcg-echo "Reloading nginx..."
     nginx -qt && nginx -s reload
     bcg-done
+else
+    bcg-debug "Nginx is not running."
 fi

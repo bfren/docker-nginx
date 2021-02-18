@@ -1,15 +1,14 @@
 #!/bin/sh
 
 set -eo pipefail
+export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
 # Add www user.
 #======================================================================================================================
 
-bcg-echo "Adding www user..."
 bcg-adduser www
-bcg-done
 
 
 #======================================================================================================================
@@ -19,7 +18,7 @@ bcg-done
 cd /tmp
 
 VERSION=$(cat VERSION)
-bcg-debug "install" "Nginx version ${VERSION}."
+bcg-debug "Nginx version ${VERSION}."
 
 
 #======================================================================================================================
@@ -38,6 +37,7 @@ bcg-done
 # Cleanup.
 #======================================================================================================================
 
+bcg-debug "Cleaning up default Nginx configuration and files."
 rm -rf /etc/nginx/conf.d/* /etc/nginx/http.d/* /var/www/*
 
 
@@ -45,4 +45,5 @@ rm -rf /etc/nginx/conf.d/* /etc/nginx/http.d/* /var/www/*
 # Link /var/www/localhost to /www.
 #======================================================================================================================
 
+bcg-debug "Linking /www to /var/www/localhost."
 ln -s /www /var/www/localhost

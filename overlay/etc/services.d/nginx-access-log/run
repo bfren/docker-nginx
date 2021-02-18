@@ -1,11 +1,12 @@
 #!/usr/bin/with-contenv sh
 
 set -euo pipefail
+export BCG_E="nginx-access-log/$(basename ${0})"
 
 
 #======================================================================================================================
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx-access-log/run.
 #======================================================================================================================
 
-bcg-echo "Starting Nginx access log"
+bcg-echo "Starting Nginx access log."
 logutil-service -f /var/run/s6/nginx-access-log-fifo /var/log/nginx-access-logs
