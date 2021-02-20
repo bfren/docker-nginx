@@ -8,5 +8,7 @@ export BCG_E=`basename ${0}`
 # Add environment variables.
 #======================================================================================================================
 
+bcg-env "LIB_NGINX" "${LIB}/nginx"
+
 bcg-env "NGINX_WWW" "/www"
 bcg-env "NGINX_LOCALHOST_CONF" "/etc/nginx/sites/localhost.conf"

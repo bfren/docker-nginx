@@ -5,7 +5,7 @@ export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Attempt to load localhost using test-url.
+# Attempt to load a URL using wget.
 #======================================================================================================================
 
-${LIB_NGINX}/test-url http://localhost
+wget --no-verbose --spider --tries=1 "${1}" || exit 1
