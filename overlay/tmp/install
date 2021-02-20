@@ -40,17 +40,16 @@ bcg-done
 CONF_D=/etc/nginx/conf.d
 HTTP_D=/etc/nginx/http.d
 bcg-debug "Cleaning up default Nginx configuration and files."
-rm -rf ${CONF_D}/* ${HTTP_D}/* /var/www/*
+rm -rf ${CONF_D} ${HTTP_D} /var/www/*
 
 
 #======================================================================================================================
 # Create links.
 #======================================================================================================================
 
-if [ ! -d ${HTTP_D} ] ; then
-    bcg-debug "Linking ${CONF_D} to ${HTTP_D}."
-    ln -s ${CONF_D} ${HTTP_D}
-fi
+bcg-debug "Creating ${HTTP_D} and linking ${CONF_D}."
+mkdir -p ${HTTP_D}
+ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
 
 bcg-debug "Linking /www to /var/www/localhost."
 ln -s /www /var/www/localhost
