@@ -4,5 +4,3 @@
 /var/lib/nginx true www:www 0644 0755
 /var/log/nginx-access-logs false 65534:65533 0755 2700
 /var/log/nginx-error-logs false 65534:65533 0755 2700
-/var/www/localhost false www:www 0644 0755
-/www true www:www 0644 0755
