@@ -9,3 +9,4 @@ export BCG_E=`basename ${0}`
 #======================================================================================================================
 
 bcg-env "NGINX_WWW" "/www"
+bcg-env "NGINX_LOCALHOST_CONF" "/etc/nginx/sites/localhost.conf"
