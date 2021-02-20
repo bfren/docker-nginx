@@ -37,13 +37,20 @@ bcg-done
 # Cleanup.
 #======================================================================================================================
 
+CONF_D=/etc/nginx/conf.d
+HTTP_D=/etc/nginx/http.d
 bcg-debug "Cleaning up default Nginx configuration and files."
-rm -rf /etc/nginx/conf.d/* /etc/nginx/http.d/* /var/www/*
+rm -rf ${CONF_D}/* ${HTTP_D}/* /var/www/*
 
 
 #======================================================================================================================
-# Link /var/www/localhost to /www.
+# Create links.
 #======================================================================================================================
+
+if [ ! -d ${HTTP_D} ] ; then
+    bcg-debug "Linking ${CONF_D} to ${HTTP_D}."
+    ln -s ${CONF_D} ${HTTP_D}
+fi
 
 bcg-debug "Linking /www to /var/www/localhost."
 ln -s /www /var/www/localhost
