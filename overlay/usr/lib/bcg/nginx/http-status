@@ -8,4 +8,4 @@ export BCG_E=`basename ${0}`
 # Attempt to load a URL using wget and print the HTTP status code.
 #======================================================================================================================
 
-wget --server-response --spider "{1}" 2>&1 | grep "HTTP/" | awk '{print $2}'
+wget --server-response --spider "${1}" 2>&1 | grep "HTTP/" | awk '{print $2}'
