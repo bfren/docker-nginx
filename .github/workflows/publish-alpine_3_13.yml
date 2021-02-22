@@ -1,4 +1,4 @@
-name: alpine-3.13-main
+name: publish-alpine_3_13
 
 on:
   push:
@@ -7,13 +7,13 @@ on:
     tags-ignore:
       - '**'
     paths:
-      - '.github/workflows/build_alpine_3_13-main.yml'
+      - '.github/workflows/publish-alpine_3_13.yml'
       - 'alpine-3.13/**'
       - 'overlay/**'
       - 'VERSION'
 
 jobs:
-  main:
+  publish-alpine_3_12:
     runs-on: ubuntu-latest
     steps:
       -

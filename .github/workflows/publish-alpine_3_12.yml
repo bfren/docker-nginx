@@ -1,19 +1,19 @@
-name: alpine-3.13-dev
+name: publish-alpine_3_12
 
 on:
   push:
-    branches-ignore:
+    branches:
       - 'main'
     tags-ignore:
       - '**'
     paths:
-      - '.github/workflows/build_alpine_3_13-dev.yml'
-      - 'alpine-3.13/**'
+      - '.github/workflows/publish-alpine_3_12.yml'
+      - 'alpine-3.12/**'
       - 'overlay/**'
       - 'VERSION'
 
 jobs:
-  main:
+  publish-alpine_3_12:
     runs-on: ubuntu-latest
     steps:
       -
@@ -43,14 +43,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./alpine-3.13/Dockerfile
+          file: ./alpine-3.12/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bcgdesign/nginx:dev
-            bcgdesign/nginx:dev-alpine-3.13
-            bcgdesign/nginx:${{ steps.version.outputs.content }}
-            bcgdesign/nginx:alpine-3.13-${{ steps.version.outputs.content }}
+            bcgdesign/nginx:alpine-3.12
+            bcgdesign/nginx:alpine-3.12-${{ steps.version.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
