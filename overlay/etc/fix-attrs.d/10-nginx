@@ -1,4 +1,4 @@
-/etc/nginx true www:www 0644 0755
+/etc/nginx true www:www 0400 0555
 /usr/local/bin/nginx-* false root:root 0500 0500
 /var/lib/nginx true www:www 0644 0755
 /var/log/nginx-access-logs false 65534:65533 0755 2700
