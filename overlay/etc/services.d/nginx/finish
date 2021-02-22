@@ -10,7 +10,8 @@ set -euo pipefail
 #   -s  send a signal to the master process (quit: shut down server gracefully)
 #======================================================================================================================
 
-bcg-debug "Quitting Nginx." "${PWD##*/}/$(basename ${0})"
+NAME=${PWD##*/}
+bcg-debug "Quitting Nginx." "${NAME}/$(basename ${0})"
 nginx -s quit
 
-bcg-svc-finish -s ${PWD##*/} -t
+bcg-svc-finish -s ${NAME} -t
