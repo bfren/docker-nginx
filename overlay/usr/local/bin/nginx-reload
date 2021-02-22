@@ -1,10 +1,13 @@
 #!/usr/bin/with-contenv sh
 
 set -euo pipefail
+export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Reload Nginx - but only if it is running
+# Reload Nginx - but only if it is running.
+#
+# Nginx flags
 #   -q  suppress non-error messages during testing
 #   -t  test Nginx configuration file(s)
 #   -s  send a signal to the master process (reload: reload configuration, start new worker process, shut down old one)
@@ -14,4 +17,6 @@ if [ ! -z "$(pidof nginx)" ] ; then
     bcg-echo "Reloading nginx..."
     nginx -qt && nginx -s reload
     bcg-done
+else
+    bcg-debug "Nginx is not running."
 fi

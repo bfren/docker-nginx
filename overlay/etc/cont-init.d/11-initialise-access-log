@@ -1,11 +1,8 @@
-#!/usr/bin/with-contenv sh
-
-set -euo pipefail
-export BCG_E=`basename ${0}`
+#!/usr/bin/execlineb -P
 
 
 #======================================================================================================================
-# Use executable to reload Nginx.
+# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/cont-init.d/00-initialize-logfifos.
 #======================================================================================================================
 
-nginx-reload
+if { logutil-newfifo /var/run/s6/nginx-access-log-fifo }

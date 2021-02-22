@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/usr/bin/with-contenv sh
 
 set -euo pipefail
+export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Attempt to load localhost using wget
+# Attempt to load localhost using bcg-test-url.
 #======================================================================================================================
 
-wget --no-verbose --tries=1 --spider http://localhost || exit 1
+bcg-test-url http://localhost

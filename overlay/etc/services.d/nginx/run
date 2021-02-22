@@ -1,14 +1,18 @@
 #!/usr/bin/with-contenv sh
 
 set -euo pipefail
+export BCG_E="${PWD##*/}/$(basename ${0})"
 
 
 #======================================================================================================================
-# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx/run
+# Start Nginx as a foreground service.
+# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx/run.
+#
+# Nginx flags
 #   -q  suppress non-error messages during testing
 #   -t  test Nginx configuration file(s)
 #   -g  set global configuration directive
 #======================================================================================================================
 
-bcg-echo "Starting Nginx"
+bcg-echo "Starting Nginx in foreground mode."
 nginx -g "daemon off;" > /dev/null 2>&1 # send to /dev/null because the log forwarder will show any startup errors

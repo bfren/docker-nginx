@@ -1,7 +1,11 @@
-#!/usr/bin/execlineb -P
+#!/bin/sh
+
+set -euo pipefail
+export BCG_E=`basename ${0}`
+
 
 #======================================================================================================================
-# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/cont-init.d/00-initialize-logfifos
+# Attempt to load a URL using wget and print the HTTP status code.
 #======================================================================================================================
 
-if { logutil-newfifo /var/run/s6/nginx-access-log-fifo }
+wget --server-response --spider "${1}" 2>&1 | grep "HTTP/" | awk '{print $2}'
