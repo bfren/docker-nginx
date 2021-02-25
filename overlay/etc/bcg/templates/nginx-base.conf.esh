@@ -1,4 +1,4 @@
 listen                              80;
 listen                              [::]:80;
-root                                /www;
+root                                <%= ${NGINX_ROOT:-${NGINX_WWW}} %>;
 include                             helpers/nginx-discworld.conf;
