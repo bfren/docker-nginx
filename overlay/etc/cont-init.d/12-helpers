@@ -5,11 +5,12 @@ export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Add environment variables.
+# Generate helper files.
 #======================================================================================================================
 
-bcg-env "NGINX_LIB" "${BCG_LIB}/nginx"
+bcg-echo "Generate Nginx helper files."
 
-bcg-env "NGINX_WWW" "/www"
-bcg-env "NGINX_HELPERS" "/etc/nginx/helpers"
-bcg-env "NGINX_LOCALHOST_CONF" "/etc/nginx/sites/localhost.conf"
+NGINX_BASE=nginx-base.conf
+bcg-debug " .. ${NGINX_BASE}."
+esh -o ${NGINX_HELPERS}/${NGINX_BASE} \
+    ${TEMPLATES}/${NGINX_BASE}.esh
