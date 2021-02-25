@@ -5,12 +5,14 @@ export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Generate helper files.
+# Generate configuration files.
 #======================================================================================================================
 
-bcg-echo "Generate Nginx helper files."
+bcg-echo "Generating Nginx configuration files..."
 
 NGINX_BASE=nginx-base.conf
-bcg-debug " .. ${NGINX_BASE}."
+bcg-debug " .. ${NGINX_BASE}"
 esh -o ${NGINX_HELPERS}/${NGINX_BASE} \
-    ${TEMPLATES}/${NGINX_BASE}.esh
+    ${BCG_TEMPLATES}/${NGINX_BASE}.esh
+
+bcg-done
