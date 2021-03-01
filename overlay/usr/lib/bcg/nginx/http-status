@@ -13,8 +13,8 @@ URL=${1}
 
 
 #======================================================================================================================
-# Attempt to load a URL using wget and print the HTTP status code.
+# Attempt to load a URL using wget and print the final HTTP status code.
+#   (wget follows redirects - we end with tail -1 so we return the final code.)
 #======================================================================================================================
 
-bcg-debug "Requesting HTTP status of ${URL}." "nginx/http-status"
-wget --server-response --spider "${URL}" 2>&1 | grep "HTTP/" | awk '{print $2}'
+wget --server-response --spider "${URL}" 2>&1 | grep -m 1 "HTTP/" | awk '{print $2}' | tail -1
