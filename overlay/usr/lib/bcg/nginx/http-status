@@ -1,11 +1,20 @@
 #!/bin/sh
 
 set -euo pipefail
-export BCG_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Check argument.
+#   1   URL to test
+#======================================================================================================================
+
+[[ -z "${1-}" ]] && bcg-error "You must provide a URL to load." "nginx/http-status"
+URL=${1}
 
 
 #======================================================================================================================
 # Attempt to load a URL using wget and print the HTTP status code.
 #======================================================================================================================
 
-wget --server-response --spider "${1}" 2>&1 | grep "HTTP/" | awk '{print $2}'
+bcg-debug "Requesting HTTP status of ${URL}." "nginx/http-status"
+wget --server-response --spider "${URL}" 2>&1 | grep "HTTP/" | awk '{print $2}'
