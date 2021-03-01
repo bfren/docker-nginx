@@ -1,4 +1,4 @@
-FROM bcgdesign/alpine-s6:alpine-3.12-2.0.2
+FROM bcgdesign/alpine-s6:alpine3.12-2.0.3
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.name="Nginx" \
@@ -12,7 +12,7 @@ RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
 EXPOSE 80
 
 COPY ./overlay /
-COPY ./alpine-3.12/NGINX_BUILD /tmp/VERSION
+COPY ./alpine3.12/NGINX_BUILD /tmp/VERSION
 
 RUN bcg-install
 
