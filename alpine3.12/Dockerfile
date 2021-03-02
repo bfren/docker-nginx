@@ -1,4 +1,4 @@
-FROM bcgdesign/alpine-s6:alpine3.12-2.0.3
+FROM bcgdesign/alpine-s6:alpine3.12-2.0.4
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.name="Nginx" \
@@ -10,6 +10,10 @@ LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
 RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
 
 EXPOSE 80
+
+ENV \
+    # set to 0 to enable favicons - otherwise 204 (No Content) will always be returned
+    NGINX_IGNORE_FAVICON=1
 
 COPY ./overlay /
 COPY ./alpine3.12/NGINX_BUILD /tmp/VERSION
