@@ -1,6 +1,8 @@
+<% if [ "${NGINX_IGNORE_FAVICON-}" = "1" ] ; then -%>
 location = /favicon.ico {
     root                            /var/lib/nginx/html;
     return                          204;
     access_log                      off;
     log_not_found                   off;
 }
+<% fi %>
