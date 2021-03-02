@@ -10,6 +10,7 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 * [Ports](#ports)
 * [Volumes](#volumes)
+* [Environment Variables](#environment-variables)
 * [Helper Functions](#helper-functions)
 * [Nginx Configuration Helpers](#nginx-configuration-helpers)
 * [Authors / Licence / Copyright](#authors)
@@ -23,6 +24,12 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 | Volume | Purpose                                                                                                       |
 | ------ | ------------------------------------------------------------------------------------------------------------- |
 | `/www` | Files in this directory will be served by Nginx (if not mapped, a 'Welcome to Nginx' message will be served). |
+
+## Environment Variables
+
+| Variable               | Values | Description                                                                                                        | Default |
+| ---------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ | ------- |
+| `NGINX_IGNORE_FAVICON` | 0 or 1 | If 1, a helper configuration file will contain a directive to return 204 (No Content) when a favicon is requested. | 1       |
 
 ## Helper Functions
 
