@@ -6,11 +6,6 @@ on:
       - 'main'
     tags-ignore:
       - '**'
-    paths:
-      - '.github/workflows/dev-alpine3_13.yml'
-      - 'alpine3.13/**'
-      - 'overlay/**'
-      - 'VERSION'
 
 jobs:
   test-alpine3_13:
