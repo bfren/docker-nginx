@@ -1,8 +1,8 @@
-FROM bcgdesign/alpine-s6:alpine3.13-2.1.0
+FROM bcgdesign/alpine-s6:alpineedge-2.1.0
 
 LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
     org.label-schema.name="Nginx" \
-    org.label-schema.version="Alpine 3.13" \
+    org.label-schema.version="Alpine Edge" \
     org.label-schema.vendor="Ben Green" \
     org.label-schema.schema-version="1.0"
 
@@ -16,7 +16,7 @@ ENV \
     NGINX_IGNORE_FAVICON=1
 
 COPY ./overlay /
-COPY ./alpine3.13/NGINX_BUILD /tmp/VERSION
+COPY ./alpineedge/NGINX_BUILD /tmp/VERSION
 
 RUN bcg-install
 
