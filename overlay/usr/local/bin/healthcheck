@@ -8,4 +8,4 @@ export BCG_E=`basename ${0}`
 # Attempt to load localhost using bcg-test-url.
 #======================================================================================================================
 
-bcg-test-url http://localhost
+${NGINX_LIB}/http-test http://localhost
