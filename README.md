@@ -1,6 +1,7 @@
 # Docker Nginx
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bencgreen/docker-nginx) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpine3_12?label=github+3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpine3_13?label=github+3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpineedge?label=github+edge) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/bcgdesign/nginx?label=docker) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/nginx?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/nginx/latest?label=size)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bencgreen/docker-nginx) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/nginx?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/nginx/latest?label=size)<br/>
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpine3_12?label=alpine+3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpine3_13?label=alpine+3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpineedge?label=alpine+edge)
 
 [Docker Repository](https://hub.docker.com/r/bcgdesign/nginx) - [bcg|design ecosystem](https://github.com/bencgreen/docker)
 
