@@ -17,4 +17,4 @@ URL=${1}
 #   (wget follows redirects - we end with tail -1 so we return the final code.)
 #======================================================================================================================
 
-wget --server-response --spider "${URL}" 2>&1 | grep "HTTP/" | awk '{print $2}' | tail -1
+wget --server-response --spider --quiet "${URL}" 2>&1 | awk 'NR==1{print $2}' | tail -1

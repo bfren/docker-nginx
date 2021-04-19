@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  publish-alpine3_12:
+  publish-alpine3_13:
     runs-on: ubuntu-latest
     steps:
       -

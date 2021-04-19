@@ -1,0 +1,41 @@
+#!/usr/bin/with-contenv bash
+
+set -euo pipefail
+
+
+#======================================================================================================================
+# Check argument.
+#   1   URL to test
+#======================================================================================================================
+
+[[ -z "${1-}" ]] && bcg-error "You must provide a URL to test." "nginx/http-ok"
+URL=${1}
+
+
+#======================================================================================================================
+# Get status.
+#======================================================================================================================
+
+STATUS=$(${NGINX_LIB}/http-status "${URL}" || true)
+
+
+#======================================================================================================================
+# Match status:
+#   200-399 = ok or redirect (i.e. something is working)
+#   400-499 = missing content, permissions error (i.e. something's wrong)
+#   500-599 = server errors something is very wrong
+#======================================================================================================================
+
+# If STATUS is not a number, something went wrong loading the URL
+RE='^[0-9]+$'
+[[ ${STATUS} =~ ${RE} ]] || bcg-error "Unable to load ${URL}."
+
+# Output the status and result
+bcg-debug "Status ${STATUS}:"
+if [ "${STATUS}" -ge 200 ] && [ "${STATUS}" -le 399 ] ; then
+    bcg-debug "  OK."
+elif [ "${STATUS}" -ge 400 ] && [ "${STATUS}" -le 499 ] ; then
+    bcg-error "  content error."
+else
+    bcg-error "  error."
+fi
