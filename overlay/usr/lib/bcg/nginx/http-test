@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv sh
 
 set -euo pipefail
 
@@ -27,8 +27,9 @@ STATUS=$(${NGINX_LIB}/http-status "${URL}" || true)
 #======================================================================================================================
 
 # If STATUS is not a number, something went wrong loading the URL
-RE='^[0-9]+$'
-[[ ${STATUS} =~ ${RE} ]] || bcg-error "Unable to load ${URL}."
+if echo "${STATUS}" | grep -q '^[0-9]+$' ; then
+    bcg-error "Unable to load ${URL}."
+fi
 
 # Output the status and result
 bcg-debug "Status ${STATUS}:"
