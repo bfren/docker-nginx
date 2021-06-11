@@ -8,4 +8,4 @@ export BCG_E="${PWD##*/}/$(basename ${0})"
 # Forward Nginx error log to Docker.
 #======================================================================================================================
 
-bcg-forward nginx-error-log /var/log/nginx/error.log
+bf-forward nginx-error-log /var/log/nginx/error.log

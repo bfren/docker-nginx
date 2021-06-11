@@ -8,5 +8,5 @@ export BCG_E="${PWD##*/}/$(basename ${0})"
 # From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx-access-log/run.
 #======================================================================================================================
 
-bcg-echo "Starting Nginx access log."
+bf-echo "Starting Nginx access log."
 logutil-service -f /var/run/s6/nginx-access-log-fifo /var/log/nginx-access-logs

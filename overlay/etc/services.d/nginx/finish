@@ -11,7 +11,7 @@ set -euo pipefail
 #======================================================================================================================
 
 NAME=${PWD##*/}
-bcg-debug "Quitting Nginx." "${NAME}/$(basename ${0})"
+bf-debug "Quitting Nginx." "${NAME}/$(basename ${0})"
 nginx -s quit
 
-bcg-svc-finish -s ${NAME} -t
+bf-svc-finish -s ${NAME} -t

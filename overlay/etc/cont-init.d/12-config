@@ -8,16 +8,16 @@ export BCG_E=`basename ${0}`
 # Generate configuration files.
 #======================================================================================================================
 
-bcg-echo "Generating Nginx configuration files..."
+bf-echo "Generating Nginx configuration files..."
 
 NGINX_BASE_CONF=nginx-base.conf
-bcg-debug " .. ${NGINX_BASE_CONF}"
+bf-debug " .. ${NGINX_BASE_CONF}"
 esh -o ${NGINX_HELPERS}/${NGINX_BASE_CONF} \
     ${BCG_TEMPLATES}/${NGINX_BASE_CONF}.esh
 
 NGINX_IGNORE_FAVICON_CONF=nginx-ignore-favicon.conf
-bcg-debug " .. ${NGINX_IGNORE_FAVICON_CONF}"
+bf-debug " .. ${NGINX_IGNORE_FAVICON_CONF}"
 esh -o ${NGINX_HELPERS}/${NGINX_IGNORE_FAVICON_CONF} \
     ${BCG_TEMPLATES}/${NGINX_IGNORE_FAVICON_CONF}.esh
 
-bcg-done
+bf-done

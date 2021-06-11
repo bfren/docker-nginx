@@ -8,7 +8,7 @@ export BCG_E=`basename ${0}`
 # Add www user.
 #======================================================================================================================
 
-bcg-adduser www
+bf-adduser www
 
 
 #======================================================================================================================
@@ -18,19 +18,19 @@ bcg-adduser www
 cd /tmp
 
 VERSION=$(cat VERSION)
-bcg-debug "Nginx version ${VERSION}."
+bf-debug "Nginx version ${VERSION}."
 
 
 #======================================================================================================================
 # Install Nginx and dependencies.
 #======================================================================================================================
 
-bcg-echo "Installing Nginx v${VERSION}..."
+bf-echo "Installing Nginx v${VERSION}..."
 apk add --no-cache \
     ca-certificates \
     nginx=${VERSION}
 mkdir -p /var/run/nginx
-bcg-done
+bf-done
 
 
 #======================================================================================================================
@@ -39,7 +39,7 @@ bcg-done
 
 CONF_D=/etc/nginx/conf.d
 HTTP_D=/etc/nginx/http.d
-bcg-debug "Cleaning up default Nginx configuration and files."
+bf-debug "Cleaning up default Nginx configuration and files."
 rm -rf ${CONF_D} ${HTTP_D} /var/www/*
 
 
@@ -47,7 +47,7 @@ rm -rf ${CONF_D} ${HTTP_D} /var/www/*
 # Create and link Nginx directories.
 #======================================================================================================================
 
-bcg-debug "Creating Nginx directories."
+bf-debug "Creating Nginx directories."
 
 mkdir -p /var/lib/nginx
 mkdir -p /var/log/nginx-access-logs
@@ -55,5 +55,5 @@ mkdir -p /var/log/nginx-access-logs
 mkdir -p ${HTTP_D}
 ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
 
-bcg-debug "Linking /www to /var/www/localhost."
+bf-debug "Linking /www to /var/www/localhost."
 ln -s /www /var/www/localhost

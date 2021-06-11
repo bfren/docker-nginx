@@ -5,7 +5,7 @@ export BCG_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Attempt to load localhost using bcg-test-url.
+# Attempt to load localhost using bf-test-url.
 #======================================================================================================================
 
 ${NGINX_LIB}/http-test http://localhost

@@ -14,5 +14,5 @@ export BCG_E="${PWD##*/}/$(basename ${0})"
 #   -g  set global configuration directive
 #======================================================================================================================
 
-bcg-echo "Starting Nginx in foreground mode."
+bf-echo "Starting Nginx in foreground mode."
 nginx -g "daemon off;" > /dev/null 2>&1 # send to /dev/null because the log forwarder will show any startup errors

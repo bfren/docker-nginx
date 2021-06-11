@@ -18,6 +18,6 @@ ENV \
 COPY ./overlay /
 COPY ./alpineedge/NGINX_BUILD /tmp/VERSION
 
-RUN bcg-install
+RUN bf-install
 
 VOLUME [ "/www" ]
