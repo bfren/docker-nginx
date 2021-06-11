@@ -1,9 +1,9 @@
 # Docker Nginx
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bencgreen/docker-nginx) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/nginx?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/nginx/latest?label=size)<br/>
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpine3_12?label=alpine+3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpine3_13?label=alpine+3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bencgreen/docker-nginx/dev-alpineedge?label=alpine+edge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-nginx) ![Docker Pulls](https://img.shields.io/docker/pulls/bcgdesign/nginx?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bcgdesign/nginx/latest?label=size)<br/>
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-alpine3_12?label=alpine+3.12) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-alpine3_13?label=alpine+3.13) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-alpineedge?label=alpine+edge)
 
-[Docker Repository](https://hub.docker.com/r/bcgdesign/nginx) - [bcg|design ecosystem](https://github.com/bencgreen/docker)
+[Docker Repository](https://hub.docker.com/r/bcgdesign/nginx) - [bfren ecosystem](https://github.com/bfren/docker)
 
 A simple Nginx base image - no SSL support etc, designed to be used behind a proxy server.
 
@@ -14,7 +14,7 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 * [Environment Variables](#environment-variables)
 * [Helper Functions](#helper-functions)
 * [Nginx Configuration Helpers](#nginx-configuration-helpers)
-* [Authors / Licence / Copyright](#authors)
+* [Licence / Copyright](#licence)
 
 ## Ports
 
@@ -50,15 +50,11 @@ The image contains a handful of useful Nginx configuration 'helper' files, which
 | `-static-files.conf`   | Sets useful headers, cache, and expiration values for serving static files.                                                         |
 | `-uploads.conf`        | Sets `client_max_body_size` to 0 - so there is no limit on file upload size.                                                        |
 
-## Authors
+## Licence
 
-* [Ben Green](https://github.com/bencgreen)
-
-## License
-
-> [MIT](https://mit.bcgdesign.com/2020)
+> [MIT](https://mit.bfren.uk/2020)
 
 ## Copyright
 
-> Copyright (c) 2021 Ben Green <https://bcgdesign.com>
+> Copyright (c) 2021 bfren.uk
 > Unless otherwise stated
