@@ -8,7 +8,7 @@ set -euo pipefail
 #   1   URL to test
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bcg-error "You must provide a URL to load." "nginx/http-status"
+[[ -z "${1-}" ]] && bf-error "You must provide a URL to load." "nginx/http-status"
 URL=${1}
 
 

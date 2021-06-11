@@ -1,10 +1,4 @@
-FROM bcgdesign/alpine-s6:alpine3.12-2.1.3
-
-LABEL maintainer="Ben Green <ben@bcgdesign.com>" \
-    org.label-schema.name="Nginx" \
-    org.label-schema.version="Alpine 3.12" \
-    org.label-schema.vendor="Ben Green" \
-    org.label-schema.schema-version="1.0"
+FROM bfren/alpine-s6:alpine3.12-2.2.0
 
 # fix for creating S6-compatible Nginx logs
 RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
@@ -18,6 +12,6 @@ ENV \
 COPY ./overlay /
 COPY ./alpine3.12/NGINX_BUILD /tmp/VERSION
 
-RUN bcg-install
+RUN bf-install
 
 VOLUME [ "/www" ]
