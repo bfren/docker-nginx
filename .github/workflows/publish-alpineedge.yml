@@ -40,8 +40,8 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bcgdesign/nginx:alpineedge
-            bcgdesign/nginx:alpineedge-${{ steps.version.outputs.content }}
+            bfren/nginx:alpineedge
+            bfren/nginx:alpineedge-${{ steps.version.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
