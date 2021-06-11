@@ -1,14 +1,14 @@
 #!/usr/bin/with-contenv sh
 
 set -euo pipefail
-export BCG_E=`basename ${0}`
+export BF_E=`basename ${0}`
 
 
 #======================================================================================================================
 # Add environment variables.
 #======================================================================================================================
 
-bf-env "NGINX_LIB" "${BCG_LIB}/nginx"
+bf-env "NGINX_LIB" "${BF_LIB}/nginx"
 
 bf-env "NGINX_WWW" "/www"
 bf-env "NGINX_HELPERS" "/etc/nginx/helpers"
