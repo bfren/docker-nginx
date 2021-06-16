@@ -1,4 +1,4 @@
-name: dev-alpine3_13
+name: dev-alpine3_14
 
 on:
   push:
@@ -9,13 +9,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-alpine3_13:
+  test-alpine3_14:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout code
         uses: actions/checkout@v2
-  build-alpine3_13:
+  build-alpine3_14:
     runs-on: ubuntu-latest
     steps:
       -
@@ -49,8 +49,10 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:alpine3.13-dev
-            bfren/nginx:alpine3.13-${{ steps.version.outputs.content }}-beta
+            bfren/nginx:${{ steps.version.outputs.content }}-beta
+            bfren/nginx:dev
+            bfren/nginx:alpine3.14-dev
+            bfren/nginx:alpine3.14-${{ steps.version.outputs.content }}-beta
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
