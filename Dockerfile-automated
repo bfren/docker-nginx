@@ -10,7 +10,7 @@ ENV \
     NGINX_IGNORE_FAVICON=1
 
 COPY ./overlay /
-COPY ./alpine3.13/NGINX_BUILD /tmp/VERSION
+COPY ./alpine3.14/NGINX_BUILD /tmp/VERSION
 
 RUN bf-install
 
