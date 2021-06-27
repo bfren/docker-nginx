@@ -19,6 +19,24 @@ jobs:
           path: ./VERSION
         id: version
       -
+        name: Read Nginx version - minor
+        uses: bfren/read-file-action@v1
+        with:
+          path: ./alpine3.13/NGINX_MINOR
+        id: nginx_minor
+      -
+        name: Read Nginx version - revision
+        uses: bfren/read-file-action@v1
+        with:
+          path: ./alpine3.13/NGINX_REVISION
+        id: nginx_revision
+      -
+        name: Read Nginx version - build
+        uses: bfren/read-file-action@v1
+        with:
+          path: ./alpine3.13/NGINX_BUILD
+        id: nginx_build
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -42,6 +60,11 @@ jobs:
           tags: |
             bfren/nginx:alpine3.13
             bfren/nginx:alpine3.13-${{ steps.version.outputs.content }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.content }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.content }}-${{ steps.version.outputs.content }}
+            bfren/nginx:nginx${{ steps.nginx_revision.outputs.content }}
+            bfren/nginx:nginx${{ steps.nginx_revision.outputs.content }}-${{ steps.version.outputs.content }}
+            bfren/nginx:nginx${{ steps.nginx_build.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

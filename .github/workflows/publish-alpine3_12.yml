@@ -19,6 +19,12 @@ jobs:
           path: ./VERSION
         id: version
       -
+        name: Read Nginx version - build
+        uses: bfren/read-file-action@v1
+        with:
+          path: ./alpine3.12/NGINX_BUILD
+        id: nginx_build
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -42,6 +48,7 @@ jobs:
           tags: |
             bfren/nginx:alpine3.12
             bfren/nginx:alpine3.12-${{ steps.version.outputs.content }}
+            bfren/nginx:nginx${{ steps.nginx_build.outputs.content }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
