@@ -1,4 +1,4 @@
-FROM bfren/alpine-s6:alpineedge-2.2.11
+FROM bfren/alpine-s6:alpineedge-2.2.12
 
 # fix for creating S6-compatible Nginx logs
 RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
