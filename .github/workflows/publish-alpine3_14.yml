@@ -22,25 +22,25 @@ jobs:
         name: Read Nginx version - major
         uses: bfren/read-file@v1
         with:
-          path: ./alpine3.14/NGINX_MAJOR
+          file: ./alpine3.14/NGINX_MAJOR
         id: nginx_major
       -
         name: Read Nginx version - minor
         uses: bfren/read-file@v1
         with:
-          path: ./alpine3.14/NGINX_MINOR
+          file: ./alpine3.14/NGINX_MINOR
         id: nginx_minor
       -
         name: Read Nginx version - revision
         uses: bfren/read-file@v1
         with:
-          path: ./alpine3.14/NGINX_REVISION
+          file: ./alpine3.14/NGINX_REVISION
         id: nginx_revision
       -
         name: Read Nginx version - build
         uses: bfren/read-file@v1
         with:
-          path: ./alpine3.14/NGINX_BUILD
+          file: ./alpine3.14/NGINX_BUILD
         id: nginx_build
       -
         name: Set up QEMU

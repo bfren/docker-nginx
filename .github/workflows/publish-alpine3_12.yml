@@ -22,7 +22,7 @@ jobs:
         name: Read Nginx version - build
         uses: bfren/read-file@v1
         with:
-          path: ./alpine3.12/NGINX_BUILD
+          file: ./alpine3.12/NGINX_BUILD
         id: nginx_build
       -
         name: Set up QEMU
