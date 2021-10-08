@@ -2,10 +2,8 @@ name: dev-alpineedge
 
 on:
   push:
-    branches-ignore:
-      - 'main'
-    tags-ignore:
-      - '**'
+    branches: ['**']
+    tags-ignore: ['**']
   workflow_dispatch:
 
 jobs:
@@ -46,7 +44,7 @@ jobs:
         with:
           context: .
           file: ./alpineedge/Dockerfile
-          push: true
+          push: ${{ startsWith(github.ref, 'refs/heads/') }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bfren/nginx:alpineedge-dev
