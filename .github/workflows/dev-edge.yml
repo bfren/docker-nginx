@@ -1,4 +1,4 @@
-name: dev-alpine3_13
+name: dev-edge
 
 on:
   push:
@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-alpine3_13:
+  test-edge:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout code
         uses: actions/checkout@v2
-  build-alpine3_13:
+  build-edge:
     runs-on: ubuntu-latest
     steps:
       -
@@ -43,12 +43,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./alpine3.13/Dockerfile
+          file: ./edge/Dockerfile
           push: ${{ startsWith(github.ref, 'refs/heads/') }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:alpine3.13-dev
-            bfren/nginx:alpine3.13-${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:edge-dev
+            bfren/nginx:edge-${{ steps.version.outputs.contents }}-beta
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

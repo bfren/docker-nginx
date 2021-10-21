@@ -1,4 +1,4 @@
-name: dev-alpine3_12
+name: dev-1_20
 
 on:
   push:
@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-alpine3_12:
+  test-1_20:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout code
         uses: actions/checkout@v2
-  build-alpine3_12:
+  build-1_20:
     runs-on: ubuntu-latest
     steps:
       -
@@ -43,12 +43,14 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./alpine3.12/Dockerfile
+          file: ./1.20/Dockerfile
           push: ${{ startsWith(github.ref, 'refs/heads/') }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:alpine3.12-dev
-            bfren/nginx:alpine3.12-${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:dev
+            bfren/nginx:nginx1.20-dev
+            bfren/nginx:nginx1.20-${{ steps.version.outputs.contents }}-beta
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

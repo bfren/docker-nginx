@@ -1,4 +1,4 @@
-name: publish-alpine3_14
+name: publish-1_18
 
 on:
   release:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish-alpine3_14:
+  publish-alpine1_18:
     runs-on: ubuntu-latest
     steps:
       -
@@ -19,28 +19,16 @@ jobs:
           file: ./VERSION
         id: version
       -
-        name: Read Nginx version - major
-        uses: bfren/read-file@v1
-        with:
-          file: ./alpine3.14/NGINX_MAJOR
-        id: nginx_major
-      -
-        name: Read Nginx version - minor
-        uses: bfren/read-file@v1
-        with:
-          file: ./alpine3.14/NGINX_MINOR
-        id: nginx_minor
-      -
         name: Read Nginx version - revision
         uses: bfren/read-file@v1
         with:
-          file: ./alpine3.14/NGINX_REVISION
+          file: ./1.18/NGINX_REVISION
         id: nginx_revision
       -
         name: Read Nginx version - build
         uses: bfren/read-file@v1
         with:
-          file: ./alpine3.14/NGINX_BUILD
+          file: ./1.18/NGINX_BUILD
         id: nginx_build
       -
         name: Set up QEMU
@@ -60,18 +48,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./alpine3.14/Dockerfile
+          file: ./1.18/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:latest
-            bfren/nginx:${{ steps.version.outputs.contents }}
-            bfren/nginx:alpine3.14
-            bfren/nginx:alpine3.14-${{ steps.version.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_major.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_major.outputs.contents }}-${{ steps.version.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version.outputs.contents }}
+            bfren/nginx:nginx1.18
+            bfren/nginx:nginx1.18-${{ steps.version.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_build.outputs.contents }}
