@@ -1,4 +1,4 @@
-name: dev-alpine1_18
+name: dev-1_18
 
 on:
   push:
@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-alpine1_18:
+  test-1_18:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout code
         uses: actions/checkout@v2
-  build-alpine1_18:
+  build-1_18:
     runs-on: ubuntu-latest
     steps:
       -
