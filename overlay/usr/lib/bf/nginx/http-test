@@ -8,7 +8,7 @@ set -euo pipefail
 #   1   URL to test
 #======================================================================================================================
 
-[[ -z "${1-}" ]] && bf-error "You must provide a URL to test." "nginx/http-ok"
+[[ -z "${1-}" ]] && bf-error "You must provide a URL to test." "nginx/http-test"
 URL=${1}
 
 
@@ -28,15 +28,15 @@ STATUS=$(${NGINX_LIB}/http-status "${URL}" || true)
 
 # If STATUS is not a number, something went wrong loading the URL
 if echo "${STATUS}" | grep -q '^[0-9]+$' ; then
-    bf-error "Unable to load ${URL}."
+    bf-error "Unable to load ${URL}." "nginx/http-test"
 fi
 
 # Output the status and result
 bf-debug "Status ${STATUS}:"
 if [ "${STATUS}" -ge 200 ] && [ "${STATUS}" -le 399 ] ; then
-    bf-debug "  OK."
+    bf-debug "  OK." "nginx/http-test"
 elif [ "${STATUS}" -ge 400 ] && [ "${STATUS}" -le 499 ] ; then
-    bf-error "  content error."
+    bf-error "  content error." "nginx/http-test"
 else
-    bf-error "  error."
+    bf-error "  error." "nginx/http-test"
 fi
