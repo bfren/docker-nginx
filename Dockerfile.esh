@@ -1,4 +1,4 @@
-FROM bfren/alpine-s6:alpine3.12-3.2.2
+FROM bfren/alpine-s6:alpine<%= ${ALPINE_MINOR} %>-<%= ${BASE_REVISION} %>
 
 ARG BF_IMAGE
 ARG BF_VERSION
@@ -13,7 +13,7 @@ ENV \
     NGINX_IGNORE_FAVICON=1
 
 COPY ./overlay /
-COPY ./1.18/NGINX_BUILD /tmp/VERSION
+COPY ./<%= ${NGINX_MINOR} %>/NGINX_BUILD /tmp/VERSION
 
 RUN bf-install
 
