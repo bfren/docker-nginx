@@ -10,7 +10,7 @@ ENV \
     NGINX_IGNORE_FAVICON=1
 
 COPY ./overlay /
-COPY ./1.20/NGINX_BUILD /tmp/VERSION
+COPY ./1.20/NGINX_BUILD /tmp/
 
 RUN bf-install
 

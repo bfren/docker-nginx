@@ -17,7 +17,7 @@ bf-adduser www
 
 cd /tmp
 
-VERSION=$(cat VERSION)
+VERSION=$(cat NGINX_BUILD)
 bf-debug "Nginx version ${VERSION}."
 
 
@@ -50,7 +50,6 @@ rm -rf ${CONF_D} ${HTTP_D} /var/www/*
 bf-debug "Creating Nginx directories."
 
 mkdir -p /var/lib/nginx
-mkdir -p /var/log/nginx-access-logs
 
 mkdir -p ${HTTP_D}
 ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
