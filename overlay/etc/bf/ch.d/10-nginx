@@ -1,0 +1,4 @@
+/etc/nginx www:www 0400 0555
+/var/lib/nginx www:www 0644 0755
+/var/log/nginx-access-logs 65534:65533 0755 2700
+/var/log/nginx-error-logs 65534:65533 0755 2700
