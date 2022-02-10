@@ -3,9 +3,6 @@ FROM bfren/alpine-s6:alpineedge-4.0.0
 ARG BF_IMAGE
 ARG BF_VERSION
 
-# fix for creating S6-compatible Nginx logs
-RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
-
 EXPOSE 80
 
 ENV \
