@@ -7,7 +7,9 @@ EXPOSE 80
 
 ENV \
     # set to 0 to enable favicons - otherwise 204 (No Content) will always be returned
-    NGINX_IGNORE_FAVICON=1
+    NGINX_IGNORE_FAVICON=1 \
+    # set to 1 to forward the access log to Docker stdout
+    NGINX_FORWARD_ACCESS_LOG=0
 
 COPY ./overlay /
 COPY ./edge/NGINX_BUILD /tmp/

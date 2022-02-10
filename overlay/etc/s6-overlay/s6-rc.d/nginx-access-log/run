@@ -8,4 +8,8 @@ export BF_E="${PWD##*/}/$(basename ${0})"
 # Forward Nginx access log to Docker.
 #======================================================================================================================
 
-bf-forward nginx-access-log /var/log/nginx/access.log
+if [ "${NGINX_FORWARD_ACCESS_LOG-}" = 1 ] ; then
+    bf-forward nginx-access-log /var/log/nginx/access.log
+else
+    s6-rc -d ${S6_SERVICEDIRS}/nginx-access-log
+fi
