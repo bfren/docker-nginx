@@ -29,7 +29,6 @@ bf-echo "Installing Nginx v${VERSION}..."
 apk add --no-cache \
     ca-certificates \
     nginx=${VERSION}
-mkdir -p /var/run/nginx
 bf-done
 
 
@@ -37,22 +36,22 @@ bf-done
 # Cleanup.
 #======================================================================================================================
 
+bf-echo "Cleaning up default Nginx configuration and files..."
 CONF_D=/etc/nginx/conf.d
 HTTP_D=/etc/nginx/http.d
-bf-debug "Cleaning up default Nginx configuration and files."
 rm -rf ${CONF_D} ${HTTP_D} /var/www/*
+
+bf-echo "Removing .empty files..."
+rm /var/lib/nginx/.empty
+rm /var/run/nginx/.empty
 
 
 #======================================================================================================================
 # Create and link Nginx directories.
 #======================================================================================================================
 
-bf-debug "Creating Nginx directories."
-
-mkdir -p /var/lib/nginx
-
-mkdir -p ${HTTP_D}
-ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
+bf-debug "Linking Nginx directories."
+mkdir -p ${HTTP_D} && ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
 
 bf-debug "Linking /www to /var/www/localhost."
 ln -s /www /var/www/localhost
