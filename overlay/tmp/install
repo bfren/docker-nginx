@@ -17,8 +17,8 @@ bf-adduser www
 
 cd /tmp
 
-VERSION=$(cat VERSION)
-bf-debug "Nginx version ${VERSION}."
+VERSION=$(cat NGINX_BUILD)
+bf-echo "Nginx version ${VERSION}."
 
 
 #======================================================================================================================
@@ -29,7 +29,6 @@ bf-echo "Installing Nginx v${VERSION}..."
 apk add --no-cache \
     ca-certificates \
     nginx=${VERSION}
-mkdir -p /var/run/nginx
 bf-done
 
 
@@ -39,7 +38,7 @@ bf-done
 
 CONF_D=/etc/nginx/conf.d
 HTTP_D=/etc/nginx/http.d
-bf-debug "Cleaning up default Nginx configuration and files."
+bf-echo "Cleaning up default Nginx configuration and files."
 rm -rf ${CONF_D} ${HTTP_D} /var/www/*
 
 
@@ -47,13 +46,13 @@ rm -rf ${CONF_D} ${HTTP_D} /var/www/*
 # Create and link Nginx directories.
 #======================================================================================================================
 
-bf-debug "Creating Nginx directories."
+bf-echo "Creating Nginx directories."
 
 mkdir -p /var/lib/nginx
-mkdir -p /var/log/nginx-access-logs
+mkdir -p /var/run/nginx
 
 mkdir -p ${HTTP_D}
 ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
 
-bf-debug "Linking /www to /var/www/localhost."
+bf-echo "Linking /www to /var/www/localhost."
 ln -s /www /var/www/localhost

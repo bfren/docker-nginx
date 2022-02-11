@@ -28,9 +28,10 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Environment Variables
 
-| Variable               | Values | Description                                                                                                        | Default |
-| ---------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ | ------- |
-| `NGINX_IGNORE_FAVICON` | 0 or 1 | If 1, a helper configuration file will contain a directive to return 204 (No Content) when a favicon is requested. | 1       |
+| Variable                   | Values | Description                                                                                                        | Default |
+| -------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ | ------- |
+| `NGINX_FORWARD_ACCESS_LOG` | 0 or 1 | If 1, the access log will be forwarded to Docker's stdout.                                                         | 0       |
+| `NGINX_IGNORE_FAVICON`     | 0 or 1 | If 1, a helper configuration file will contain a directive to return 204 (No Content) when a favicon is requested. | 1       |
 
 ## Helper Functions
 
@@ -56,4 +57,4 @@ The image contains a handful of useful Nginx configuration 'helper' files, which
 
 ## Copyright
 
-> Copyright (c) 2021 [bfren](https://bfren.dev) (unless otherwise stated)
+> Copyright (c) 2020-2022 [bfren](https://bfren.dev) (unless otherwise stated)

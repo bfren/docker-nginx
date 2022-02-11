@@ -1,8 +1,10 @@
-#!/usr/bin/execlineb -P
+#!/command/with-contenv sh
+
+set -euo pipefail
 
 
 #======================================================================================================================
-# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/cont-init.d/00-initialize-logfifos.
+# Show helpful log message.
 #======================================================================================================================
 
-if { logutil-newfifo /var/run/s6/nginx-access-log-fifo }
+bf-svc-finish -s ${PWD##*/}

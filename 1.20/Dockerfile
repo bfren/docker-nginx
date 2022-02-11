@@ -1,19 +1,18 @@
-FROM bfren/alpine-s6:alpine3.15-3.2.3
+FROM bfren/alpine-s6:alpine3.15-4.0.1
 
 ARG BF_IMAGE
 ARG BF_VERSION
-
-# fix for creating S6-compatible Nginx logs
-RUN s6-rmrf /etc/s6/services/s6-fdholderd/down
 
 EXPOSE 80
 
 ENV \
     # set to 0 to enable favicons - otherwise 204 (No Content) will always be returned
-    NGINX_IGNORE_FAVICON=1
+    NGINX_IGNORE_FAVICON=1 \
+    # set to 1 to forward the access log to Docker stdout
+    NGINX_FORWARD_ACCESS_LOG=0
 
 COPY ./overlay /
-COPY ./1.20/NGINX_BUILD /tmp/VERSION
+COPY ./1.20/NGINX_BUILD /tmp/
 
 RUN bf-install
 

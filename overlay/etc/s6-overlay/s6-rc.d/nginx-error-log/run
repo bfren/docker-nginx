@@ -1,12 +1,11 @@
-#!/usr/bin/with-contenv sh
+#!/command/with-contenv sh
 
 set -euo pipefail
 export BF_E="${PWD##*/}/$(basename ${0})"
 
 
 #======================================================================================================================
-# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx-access-log/run.
+# Forward Nginx error log to Docker.
 #======================================================================================================================
 
-bf-echo "Starting Nginx access log."
-logutil-service -f /var/run/s6/nginx-access-log-fifo /var/log/nginx-access-logs
+bf-forward ${PWD##*/} /var/log/nginx/error.log

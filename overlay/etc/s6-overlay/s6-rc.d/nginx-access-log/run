@@ -1,10 +1,15 @@
-#!/usr/bin/with-contenv sh
+#!/command/with-contenv sh
 
 set -euo pipefail
+export BF_E="${PWD##*/}/$(basename ${0})"
 
 
 #======================================================================================================================
-# Show helpful log message.
+# Forward Nginx access log to Docker.
 #======================================================================================================================
 
-bf-svc-finish -s ${PWD##*/}
+if [ "${NGINX_FORWARD_ACCESS_LOG-}" = "1" ] ; then
+    bf-forward ${PWD##*/} /var/log/nginx/access.log
+else
+    s6-rc -d change ${PWD##*/}
+fi

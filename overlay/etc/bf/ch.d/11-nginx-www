@@ -1,0 +1,2 @@
+/var/www/localhost www:www 0644 0755
+/www www:www 0644 0755

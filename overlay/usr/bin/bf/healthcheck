@@ -1,11 +1,11 @@
-#!/usr/bin/with-contenv sh
+#!/command/with-contenv sh
 
 set -euo pipefail
-export BF_E="${PWD##*/}/$(basename ${0})"
+export BF_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Forward Nginx error log to Docker.
+# Attempt to load localhost.
 #======================================================================================================================
 
-bf-forward nginx-error-log /var/log/nginx/error.log
+bf-test-url -m full http://localhost
