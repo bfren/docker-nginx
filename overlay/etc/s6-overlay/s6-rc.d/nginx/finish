@@ -1,6 +1,7 @@
 #!/command/with-contenv sh
 
 set -euo pipefail
+export BF_E="${PWD##*/}/$(basename ${0})"
 
 
 #======================================================================================================================
@@ -10,8 +11,7 @@ set -euo pipefail
 #   -s  send a signal to the master process (quit: shut down server gracefully)
 #======================================================================================================================
 
-NAME=${PWD##*/}
-bf-debug "Quitting Nginx." "${NAME}/$(basename ${0})"
+bf-debug "Quitting Nginx." "${BF_E}"
 nginx -s quit
 
-bf-svc-finish -s ${NAME} -t
+bf-svc-finish -t
