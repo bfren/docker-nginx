@@ -9,7 +9,7 @@ export BF_E="${PWD##*/}/$(basename ${0})"
 #======================================================================================================================
 
 if [ "${NGINX_FORWARD_ACCESS_LOG-}" = "1" ] ; then
-    bf-forward nginx-access-log /var/log/nginx/access.log
+    bf-forward ${PWD##*/} /var/log/nginx/access.log
 else
-    s6-rc -d ${S6_SERVICEDIRS}/nginx-access-log
+    s6-rc -d change ${PWD##*/}
 fi
