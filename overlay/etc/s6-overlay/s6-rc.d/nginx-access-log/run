@@ -11,5 +11,5 @@ export BF_E="${PWD##*/}/$(basename ${0})"
 if [ "${NGINX_FORWARD_ACCESS_LOG-}" = "1" ] ; then
     bf-forward ${PWD##*/} /var/log/nginx/access.log
 else
-    bf-svc-down ${PWD##*/} || bf-error "Unable to disable service, trying again."
+    bf-svc-down ${PWD##*/}
 fi
