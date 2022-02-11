@@ -49,7 +49,7 @@ rm -rf ${CONF_D} ${HTTP_D} /var/www/*
 bf-echo "Creating Nginx directories."
 
 mkdir -p /var/lib/nginx
-mkdir -p /var/run/nginx
+mkdir -p /run/nginx
 
 mkdir -p ${HTTP_D}
 ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
