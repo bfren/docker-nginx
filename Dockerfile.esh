@@ -12,7 +12,7 @@ ENV \
     NGINX_FORWARD_ACCESS_LOG=0
 
 COPY ./overlay /
-COPY ./<%= ${NGINX_MINOR} %>/NGINX_BUILD /tmp/
+COPY ./<%= ${NGINX_MINOR} %>/overlay /
 
 RUN bf-install
 

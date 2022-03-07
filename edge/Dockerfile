@@ -1,4 +1,4 @@
-FROM bfren/alpine-s6:alpineedge-4.1.0
+FROM bfren/alpine-s6:alpineedge-4.1.1
 
 ARG BF_IMAGE
 ARG BF_VERSION
@@ -12,7 +12,7 @@ ENV \
     NGINX_FORWARD_ACCESS_LOG=0
 
 COPY ./overlay /
-COPY ./edge/NGINX_BUILD /tmp/
+COPY ./edge/overlay /
 
 RUN bf-install
 
