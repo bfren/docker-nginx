@@ -38,7 +38,7 @@ jobs:
         name: Read Nginx version - revision
         uses: bfren/read-file@v1
         with:
-          file: ./1.18/NGINX_REVISION
+          file: ./1.18/overlay/tmp/NGINX_REVISION
         id: nginx_revision
       -
         name: Set up QEMU
