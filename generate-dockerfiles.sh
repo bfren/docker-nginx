@@ -4,7 +4,7 @@ set -euo pipefail
 
 docker pull bfren/alpine
 
-BASE_REVISION="4.2.3"
+BASE_REVISION="4.2.4"
 echo "Base: ${BASE_REVISION}"
 
 NGINX_VERSIONS="1.18 1.20 edge"
