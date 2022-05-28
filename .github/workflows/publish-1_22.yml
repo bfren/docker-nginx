@@ -1,4 +1,4 @@
-name: publish-1_20
+name: publish-1_22
 
 on:
   release:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish-1_20:
+  publish-1_22:
     runs-on: ubuntu-latest
     steps:
       -
@@ -38,7 +38,7 @@ jobs:
         name: Read Nginx version - revision
         uses: bfren/read-file@v1
         with:
-          file: ./1.20/overlay/tmp/NGINX_REVISION
+          file: ./1.22/overlay/tmp/NGINX_REVISION
         id: nginx_revision
       -
         name: Set up QEMU
@@ -65,23 +65,39 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./1.20/Dockerfile
+          file: ./1.22/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:nginx1.20
-            bfren/nginx:nginx1.20-${{ steps.version_major.outputs.contents }}
-            bfren/nginx:nginx1.20-${{ steps.version_minor.outputs.contents }}
-            bfren/nginx:nginx1.20-${{ steps.version.outputs.contents }}
+            bfren/nginx:latest
+            bfren/nginx:${{ steps.version_major.outputs.contents }}
+            bfren/nginx:${{ steps.version_minor.outputs.contents }}
+            bfren/nginx:${{ steps.version.outputs.contents }}
+            bfren/nginx:nginx1
+            bfren/nginx:nginx1-${{ steps.version_major.outputs.contents }}
+            bfren/nginx:nginx1-${{ steps.version_minor.outputs.contents }}
+            bfren/nginx:nginx1-${{ steps.version.outputs.contents }}
+            bfren/nginx:nginx1.22
+            bfren/nginx:nginx1.22-${{ steps.version_major.outputs.contents }}
+            bfren/nginx:nginx1.22-${{ steps.version_minor.outputs.contents }}
+            bfren/nginx:nginx1.22-${{ steps.version.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx1.20
-            ghcr.io/bfren/nginx:nginx1.20-${{ steps.version_major.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx1.20-${{ steps.version_minor.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx1.20-${{ steps.version.outputs.contents }}
+            ghcr.io/bfren/nginx:latest
+            ghcr.io/bfren/nginx:${{ steps.version_major.outputs.contents }}
+            ghcr.io/bfren/nginx:${{ steps.version_minor.outputs.contents }}
+            ghcr.io/bfren/nginx:${{ steps.version.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx1
+            ghcr.io/bfren/nginx:nginx1-${{ steps.version_major.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx1-${{ steps.version_minor.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx1-${{ steps.version.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx1.22
+            ghcr.io/bfren/nginx:nginx1.22-${{ steps.version_major.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx1.22-${{ steps.version_minor.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx1.22-${{ steps.version.outputs.contents }}
             ghcr.io/bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
             ghcr.io/bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
       -
