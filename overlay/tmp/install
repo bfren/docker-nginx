@@ -29,7 +29,7 @@ bf-echo "Installing Nginx v${VERSION}..."
 apk add --no-cache \
     ca-certificates \
     nginx=${VERSION} \
-    nginx-mod-http-brotli=${VERSION}
+    nginx-mod-http-brotli
 bf-done
 
 
