@@ -1,7 +1,7 @@
 # Docker Nginx
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-nginx) ![Docker Pulls](https://img.shields.io/docker/pulls/bfren/nginx?label=pulls) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/bfren/nginx/latest?label=size)<br/>
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-1_18?label=Nginx+1.18) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-1_20?label=Nginx+1.20) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-edge?label=edge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-nginx) ![Docker Pulls](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fpulls%2Fnginx) ![Docker Image Size](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fsize%2Fnginx)<br/>
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-1_18?label=Nginx+1.18) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-1_20?label=Nginx+1.20) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-1_22?label=Nginx+1.22) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bfren/docker-nginx/dev-edge?label=edge)
 
 [Docker Repository](https://hub.docker.com/r/bfren/nginx) - [bfren ecosystem](https://github.com/bfren/docker)
 
