@@ -87,6 +87,3 @@ rm -rf ${CONF_D} ${HTTP_D} /var/www/*
 
 mkdir -p ${HTTP_D}
 ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
-
-bf-echo "Linking /www to /var/www/html."
-ln -s /www /var/www/html
