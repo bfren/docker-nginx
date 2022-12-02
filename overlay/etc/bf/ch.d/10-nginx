@@ -1,2 +1,1 @@
 /etc/nginx www:www 0400 0555
-/var/lib/nginx www:www 0644 0755
