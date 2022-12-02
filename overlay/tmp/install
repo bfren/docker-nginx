@@ -62,7 +62,7 @@ bf-echo "Nginx version ${VERSION}."
 
 bf-echo "Installing Nginx v${VERSION}..."
 apt update && apt install -y \
-    nginx=${VERSION}
+    nginx=${VERSION}*
 bf-done
 
 
