@@ -15,7 +15,7 @@ bf-adduser www
 # Install prerequisites.
 #======================================================================================================================
 
-apt install -y curl gnupg2 ca-certificates lsb-release debian-archive-keyring
+apt update && install -y curl gnupg2 ca-certificates lsb-release debian-archive-keyring
 
 
 #======================================================================================================================
