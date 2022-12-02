@@ -1,4 +1,4 @@
-name: dev-1_22
+name: dev-1_23
 
 on:
   push:
@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-1_22:
+  test-1_23:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout code
         uses: actions/checkout@v3
-  build-1_22:
+  build-1_23:
     runs-on: ubuntu-latest
     steps:
       -
@@ -54,17 +54,21 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./1.22/Dockerfile
+          file: ./1.23/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
           push: ${{ startsWith(github.ref, 'refs/heads/') }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:nginx1.22-dev
-            bfren/nginx:nginx1.22-${{ steps.version.outputs.contents }}-beta
-            ghcr.io/bfren/nginx:nginx1.22-dev
-            ghcr.io/bfren/nginx:nginx1.22-${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:dev
+            bfren/nginx:nginx1.23-dev
+            bfren/nginx:nginx1.23-${{ steps.version.outputs.contents }}-beta
+            ghcr.io/bfren/nginx:${{ steps.version.outputs.contents }}-beta
+            ghcr.io/bfren/nginx:dev
+            ghcr.io/bfren/nginx:nginx1.23-dev
+            ghcr.io/bfren/nginx:nginx1.23-${{ steps.version.outputs.contents }}-beta
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
