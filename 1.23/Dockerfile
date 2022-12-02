@@ -14,7 +14,7 @@ ENV \
     NGINX_FORWARD_ACCESS_LOG=0
 
 COPY ./overlay /
-COPY ./1.18/overlay /
+COPY ./1.23/overlay /
 
 RUN bf-install
 

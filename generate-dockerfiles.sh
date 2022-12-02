@@ -4,14 +4,13 @@ set -euo pipefail
 
 docker pull bfren/alpine
 
-BASE_REVISION="4.4.0"
+BASE_REVISION="1.1.4"
 echo "Base: ${BASE_REVISION}"
 
-NGINX_VERSIONS="1.18 1.20 1.22 edge"
+NGINX_VERSIONS="1.18 1.20 1.22 1.23"
 for V in ${NGINX_VERSIONS} ; do
 
     echo "Nginx ${V}"
-    ALPINE_MINOR=`cat ./${V}/ALPINE_MINOR`
 
     DOCKERFILE=$(docker run \
         -v ${PWD}:/ws \
@@ -19,7 +18,6 @@ for V in ${NGINX_VERSIONS} ; do
         bfren/alpine esh \
         "/ws/Dockerfile.esh" \
         BASE_REVISION=${BASE_REVISION} \
-        ALPINE_MINOR=${ALPINE_MINOR} \
         NGINX_MINOR=${V}
     )
 

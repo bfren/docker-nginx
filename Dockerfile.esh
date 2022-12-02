@@ -1,4 +1,4 @@
-FROM bfren/alpine-s6:alpine<%= ${ALPINE_MINOR} %>-<%= ${BASE_REVISION} %>
+FROM bfren/debian-s6:debian11-<%= ${BASE_REVISION} %>
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-nginx"
 

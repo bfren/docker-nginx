@@ -12,12 +12,47 @@ bf-adduser www
 
 
 #======================================================================================================================
-# Get Nginx Version.
+# Install prerequisites.
+#======================================================================================================================
+
+apt install -y curl gnupg2 ca-certificates lsb-release debian-archive-keyring
+
+
+#======================================================================================================================
+# Add Nginx signing key and verify signature.
+#======================================================================================================================
+
+KEYRING=/usr/share/keyrings/nginx-archive-keyring.gpg
+curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+    | tee ${KEYRING} >/dev/null
+
+EXPECTED_SIG="573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62"
+ACTUAL_SIG=`gpg --dry-run --quiet --no-keyring --import --import-options import-show ${KEYRING} | grep ${EXPECTED_SIG}`
+
+if [ "${EXPECTED_SIG}" -ne "${ACTUAL_SIG}" ] ; then
+    bf-error "Nginx keyring signature is incorrect."
+fi
+
+
+#======================================================================================================================
+# Add and pin official Nginx repository.
 #======================================================================================================================
 
 cd /tmp
 
-VERSION=$(cat NGINX_BUILD)
+REPO=$(cat NGINX_REPO)
+echo "deb [signed-by=${KEYRING}] ${REPO} `lsb_release -cs` nginx" \
+    | tee /etc/apt/sources.list.d/nginx.list
+
+echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
+    | tee /etc/apt/preferences.d/99nginx
+
+
+#======================================================================================================================
+# Get Nginx Version.
+#======================================================================================================================
+
+VERSION=$(cat NGINX_REVISION)
 bf-echo "Nginx version ${VERSION}."
 
 
@@ -26,10 +61,8 @@ bf-echo "Nginx version ${VERSION}."
 #======================================================================================================================
 
 bf-echo "Installing Nginx v${VERSION}..."
-apk add --no-cache \
-    ca-certificates \
-    nginx=${VERSION} \
-    nginx-mod-http-brotli=${VERSION}
+apt update && apt install -y \
+    nginx=${VERSION}
 bf-done
 
 
