@@ -66,7 +66,7 @@ bf-echo "Nginx version ${VERSION}."
 #======================================================================================================================
 
 bf-echo "Installing Nginx v${VERSION}..."
-apt update && apt install --no-install-recommends --no-install-suggests -y \
+apt update && apt install --no-install-recommends --no-install-suggests -y -o DPkg::Options::=--force-confnew \
     nginx=${VERSION}*
 bf-done
 
