@@ -1,4 +1,4 @@
-name: dev-1_18
+name: dev
 
 on:
   push:
@@ -7,13 +7,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-1_18:
+  test:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout code
         uses: actions/checkout@v3
-  build-1_18:
+  build:
+    strategy:
+      matrix:
+        nginx: [ "1.18", "1.20", "1.22" ]
     runs-on: ubuntu-latest
     steps:
       -
@@ -54,17 +57,35 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./1.18/Dockerfile
+          file: ./${{ matrix.nginx }}/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
           push: ${{ startsWith(github.ref, 'refs/heads/') }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:nginx1.18-dev
-            bfren/nginx:nginx1.18-${{ steps.version.outputs.contents }}-beta
-            ghcr.io/bfren/nginx:nginx1.18-dev
-            ghcr.io/bfren/nginx:nginx1.18-${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:nginx${{ matrix.nginx }}-dev
+            bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version.outputs.contents }}-beta
+            ghcr.io/bfren/nginx:nginx${{ matrix.nginx }}-dev
+            ghcr.io/bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version.outputs.contents }}-beta
+      -
+        name: Build and push default
+        id: docker_build_default
+        if: matrix.nginx == '1.22'
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./${{ matrix.nginx }}/Dockerfile
+          build-args: |
+            BF_IMAGE=${{ env.REPOSITORY_NAME }}
+            BF_VERSION=${{ steps.version.outputs.contents }}
+          push: ${{ startsWith(github.ref, 'refs/heads/') }}
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          tags: |
+            bfren/nginx:dev
+            bfren/nginx:${{ steps.version.outputs.contents }}-beta
+            ghcr.io/bfren/nginx:dev
+            ghcr.io/bfren/nginx:${{ steps.version.outputs.contents }}-beta
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
