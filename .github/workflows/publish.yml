@@ -1,4 +1,4 @@
-name: publish-1_20
+name: publish
 
 on:
   release:
@@ -6,7 +6,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish-1_20:
+  publish:
+    strategy:
+      matrix:
+        nginx: [ "1.18", "1.20", "1.22" ]
     runs-on: ubuntu-latest
     steps:
       -
@@ -38,7 +41,7 @@ jobs:
         name: Read Nginx version - revision
         uses: bfren/read-file@v2
         with:
-          file: ./1.20/overlay/tmp/NGINX_REVISION
+          file: ./${{ matrix.nginx }}/overlay/tmp/NGINX_REVISION
         id: nginx_revision
       -
         name: Set up QEMU
@@ -65,25 +68,47 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./1.20/Dockerfile
+          file: ./${{ matrix.nginx }}/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:nginx1.20
-            bfren/nginx:nginx1.20-${{ steps.version_major.outputs.contents }}
-            bfren/nginx:nginx1.20-${{ steps.version_minor.outputs.contents }}
-            bfren/nginx:nginx1.20-${{ steps.version.outputs.contents }}
+            bfren/nginx:nginx${{ matrix.nginx }}
+            bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version_major.outputs.contents }}
+            bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version_minor.outputs.contents }}
+            bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx1.20
-            ghcr.io/bfren/nginx:nginx1.20-${{ steps.version_major.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx1.20-${{ steps.version_minor.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx1.20-${{ steps.version.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx${{ matrix.nginx }}
+            ghcr.io/bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version_major.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version_minor.outputs.contents }}
+            ghcr.io/bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version.outputs.contents }}
             ghcr.io/bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
             ghcr.io/bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
+      -
+        name: Build and push default
+        id: docker_build_default
+        if: matrix.nginx == '1.22'
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./${{ matrix.nginx }}/Dockerfile
+          build-args: |
+            BF_IMAGE=${{ env.REPOSITORY_NAME }}
+            BF_VERSION=${{ steps.version.outputs.contents }}
+          push: true
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          tags: |
+            bfren/nginx:latest
+            bfren/nginx:${{ steps.version_major.outputs.contents }}
+            bfren/nginx:${{ steps.version_minor.outputs.contents }}
+            bfren/nginx:${{ steps.version.outputs.contents }}
+            ghcr.io/bfren/nginx:latest
+            ghcr.io/bfren/nginx:${{ steps.version_major.outputs.contents }}
+            ghcr.io/bfren/nginx:${{ steps.version_minor.outputs.contents }}
+            ghcr.io/bfren/nginx:${{ steps.version.outputs.contents }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
