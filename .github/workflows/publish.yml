@@ -8,6 +8,7 @@ on:
 jobs:
   publish:
     strategy:
+      fail-fast: false
       matrix:
         nginx: [ "1.18", "1.20", "1.22" ]
     runs-on: ubuntu-latest
