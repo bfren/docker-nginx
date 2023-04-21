@@ -23,6 +23,6 @@ bf-debug " .. moving /www/* to ${TMP_DIR}..."
 mv /www/* ${TMP_DIR}/
 
 bf-debug " .. moving ${TMP_DIR} to ${PUBLIC}..."
-mv {TMP_DIR} ${PUBLIC}
+mv ${TMP_DIR} ${PUBLIC}
 
 bf-done
