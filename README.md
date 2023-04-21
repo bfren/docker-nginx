@@ -6,6 +6,8 @@
 
 A simple Nginx base image - no SSL support etc, designed to be used behind a proxy server.
 
+Files are served from /www/public.
+
 ## Contents
 
 * [Ports](#ports)
@@ -21,22 +23,24 @@ A simple Nginx base image - no SSL support etc, designed to be used behind a pro
 
 ## Volumes
 
-| Volume | Purpose                                                                                                       |
-| ------ | ------------------------------------------------------------------------------------------------------------- |
-| `/www` | Files in this directory will be served by Nginx (if not mapped, a 'Welcome to Nginx' message will be served). |
+| Volume | Purpose                                                                                                   |
+| ------ | --------------------------------------------------------------------------------------------------------- |
+| `/www` | Files in this directory are served by Nginx (if not mapped, a 'Welcome to Nginx' message will be served). |
 
 ## Environment Variables
 
-| Variable                   | Values | Description                                                                                                        | Default |
-| -------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ | ------- |
-| `NGINX_FORWARD_ACCESS_LOG` | 0 or 1 | If 1, the access log will be forwarded to Docker's stdout.                                                         | 0       |
-| `NGINX_IGNORE_FAVICON`     | 0 or 1 | If 1, a helper configuration file will contain a directive to return 204 (No Content) when a favicon is requested. | 1       |
-| `NGINX_ROOT_OVERRIDE`       | string | If set, it will be used as the nginx root directory (which by default is /www).                                    | *blank* |
+| Variable                   | Values | Description                                                                                                        | Default            |
+| -------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ | ------------------ |
+| `NGINX_FORWARD_ACCESS_LOG` | 0 or 1 | If 1, the access log will be forwarded to Docker's stdout.                                                         | 0                  |
+| `NGINX_HEALTHCHECK_URI`    | URI    | The URI to load during the healthcheck.                                                                            | http://localhost   |
+| `NGINX_IGNORE_FAVICON`     | 0 or 1 | If 1, a helper configuration file will contain a directive to return 204 (No Content) when a favicon is requested. | 1                  |
+| `NGINX_ROOT_OVERRIDE`      | string | If set, it will be used as the nginx root directory (which by default is /www).                                    | *blank*            |
 
 ## Helper Functions
 
 | Function       | Arguments | Description                                                            | Usage                                    |
 | -------------- | --------- | ---------------------------------------------------------------------- | ---------------------------------------- |
+| `healthcheck`  | *None*    | Loads NGINX_HEALTHCHECK_URI to check everything is working.            | `docker exec <<CONTAINER>> healthcheck`  |
 | `nginx-reload` | *None*    | Tests Nginx configuration and if successful, reloads the Nginx server. | `docker exec <<CONTAINER>> nginx-reload` |
 
 ## Nginx Configuration Helpers
