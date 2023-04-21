@@ -1,0 +1,28 @@
+#!/command/with-contenv sh
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# If /www/public does not exist, create it and move files to it.
+#======================================================================================================================
+
+PUBLIC=/www/public
+if [ -d ${PUBLIC} ] ; then
+    bf-echo "${PUBLIC} already exists."
+    exit 0
+fi
+
+bf-echo "Moving /www/* to ${PUBLIC}..."
+
+bf-debug " .. create temporary directory..."
+TMP_DIR=`mktemp -d -t nginx.XXXXXX`
+
+bf-debug " .. moving /www/* to ${TMP_DIR}..."
+mv /www/* ${TMP_DIR}/
+
+bf-debug " .. moving ${TMP_DIR} to ${PUBLIC}..."
+mv {TMP_DIR} ${PUBLIC}
+
+bf-done

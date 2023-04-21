@@ -55,5 +55,5 @@ mkdir -p /run/nginx
 mkdir -p ${HTTP_D}
 ln -s ${HTTP_D} ${CONF_D} # older builds of Nginx use conf.d instead of http.d
 
-bf-echo "Linking /www to /var/www/localhost."
-ln -s /www /var/www/localhost
+bf-echo "Linking /www/public to /var/www/localhost."
+ln -s /www/public /var/www/localhost
