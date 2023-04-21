@@ -1,4 +1,4 @@
-FROM bfren/alpine-s6:alpine<%= ${ALPINE_MINOR} %>-<%= ${BASE_REVISION} %>
+FROM bfren/alpine-s6:alpine3.13-4.4.14
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-nginx"
 
@@ -14,7 +14,7 @@ ENV \
     NGINX_FORWARD_ACCESS_LOG=0
 
 COPY ./overlay /
-COPY ./alpine<%= ${ALPINE_MINOR} %>/overlay /
+COPY ./alpine3.13/overlay /
 
 RUN bf-install
 
