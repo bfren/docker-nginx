@@ -89,8 +89,6 @@ jobs:
             bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-alpine${{ matrix.alpine }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
       -
         name: Build and push default (all Nginx versions)
         id: docker_build_default_all
@@ -111,8 +109,6 @@ jobs:
             bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
             bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
       -
         name: Build and push default (latest)
         id: docker_build_default_latest
@@ -131,8 +127,6 @@ jobs:
             bfren/nginx:${{ steps.version_major.outputs.contents }}
             bfren/nginx:${{ steps.version_minor.outputs.contents }}
             bfren/nginx:${{ steps.version.outputs.contents }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
