@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        nginx: [ "1.18", "1.20", "1.22" ]
+        alpine: [ "3.13", "3.14", "3.15", "3.16", "3.17", "edge" ]
     runs-on: ubuntu-latest
     steps:
       -
@@ -39,10 +39,16 @@ jobs:
           file: ./VERSION
         id: version
       -
+        name: Read Nginx version - minor
+        uses: bfren/read-file@v2
+        with:
+          file: ./alpine${{ matrix.alpine }}/overlay/tmp/NGINX_MINOR
+        id: nginx_minor
+      -
         name: Read Nginx version - revision
         uses: bfren/read-file@v2
         with:
-          file: ./${{ matrix.nginx }}/overlay/tmp/NGINX_REVISION
+          file: ./alpine${{ matrix.alpine }}/overlay/tmp/NGINX_REVISION
         id: nginx_revision
       -
         name: Set up QEMU
@@ -62,27 +68,47 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./${{ matrix.nginx }}/Dockerfile
+          file: ./alpine${{ matrix.alpine }}/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
           push: true
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:nginx${{ matrix.nginx }}
-            bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version_major.outputs.contents }}
-            bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version_minor.outputs.contents }}
-            bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version_major.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version_minor.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-alpine${{ matrix.alpine }}
+            bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}
       -
-        name: Build and push default
-        id: docker_build_default
-        if: matrix.nginx == '1.22'
+        name: Build and push default (all Nginx versions)
+        id: docker_build_default_all
+        if: matrix.alpine == '3.13' || matrix.alpine == '3.15' || matrix.alpine == '3.17'
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./${{ matrix.nginx }}/Dockerfile
+          file: ./alpine${{ matrix.alpine }}/Dockerfile
+          build-args: |
+            BF_IMAGE=${{ env.REPOSITORY_NAME }}
+            BF_VERSION=${{ steps.version.outputs.contents }}
+          push: true
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          tags: |
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version_major.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version_minor.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
+            bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
+      -
+        name: Build and push default (latest)
+        id: docker_build_default_latest
+        if: matrix.alpine == '3.17'
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./alpine${{ matrix.alpine }}/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
