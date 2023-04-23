@@ -8,4 +8,4 @@ export BF_E=`basename ${0}`
 # Attempt to load localhost.
 #======================================================================================================================
 
-bf-test-url -m full http://localhost
+bf-test-url -m full ${NGINX_HEALTHCHECK_URI}

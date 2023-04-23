@@ -7,11 +7,11 @@ docker pull bfren/alpine
 BASE_REVISION="4.4.14"
 echo "Base: ${BASE_REVISION}"
 
-NGINX_VERSIONS="1.18 1.20 1.22"
-for V in ${NGINX_VERSIONS} ; do
+ALPINE_VERSIONS="3.13 3.14 3.15 3.16 3.17 edge"
+for V in ${ALPINE_VERSIONS} ; do
 
     echo "Nginx ${V}"
-    ALPINE_MINOR=`cat ./${V}/ALPINE_MINOR`
+    NGINX_MINOR=`cat ./alpine${V}/overlay/tmp/NGINX_MINOR`
 
     DOCKERFILE=$(docker run \
         -v ${PWD}:/ws \
@@ -19,11 +19,11 @@ for V in ${NGINX_VERSIONS} ; do
         bfren/alpine esh \
         "/ws/Dockerfile.esh" \
         BASE_REVISION=${BASE_REVISION} \
-        ALPINE_MINOR=${ALPINE_MINOR} \
-        NGINX_MINOR=${V}
+        ALPINE_MINOR=${V} \
+        NGINX_MINOR=${NGINX_MINOR}
     )
 
-    echo "${DOCKERFILE}" > ./${V}/Dockerfile
+    echo "${DOCKERFILE}" > ./alpine${V}/Dockerfile
 
 done
 

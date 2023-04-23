@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        nginx: [ "1.18", "1.20", "1.22" ]
+        alpine: [ "3.13", "3.14", "3.15", "3.16", "3.17", "edge" ]
     runs-on: ubuntu-latest
     steps:
       -
@@ -33,6 +33,12 @@ jobs:
         with:
           file: ./VERSION
         id: version
+      -
+        name: Read Nginx version - minor
+        uses: bfren/read-file@v2
+        with:
+          file: ./alpine${{ matrix.alpine }}/overlay/tmp/NGINX_MINOR
+        id: nginx_minor
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -51,23 +57,23 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./${{ matrix.nginx }}/Dockerfile
+          file: ./alpine${{ matrix.alpine }}/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
           push: ${{ startsWith(github.ref, 'refs/heads/') }}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
-            bfren/nginx:nginx${{ matrix.nginx }}-dev
-            bfren/nginx:nginx${{ matrix.nginx }}-${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-dev
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}-beta
       -
         name: Build and push default
         id: docker_build_default
-        if: matrix.nginx == '1.22'
+        if: matrix.alpine == '3.17'
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./${{ matrix.nginx }}/Dockerfile
+          file: ./alpine${{ matrix.alpine }}/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
