@@ -10,7 +10,7 @@ echo "Base: ${BASE_REVISION}"
 ALPINE_VERSIONS="3.13 3.14 3.15 3.16 3.17 edge"
 for V in ${ALPINE_VERSIONS} ; do
 
-    echo "Nginx ${V}"
+    echo "Nginx for Alpine ${V}"
     NGINX_MINOR=`cat ./alpine${V}/overlay/tmp/NGINX_MINOR`
 
     DOCKERFILE=$(docker run \
