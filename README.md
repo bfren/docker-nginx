@@ -6,7 +6,7 @@
 
 A simple Nginx base image - no SSL support etc, designed to be used behind a proxy server.
 
-Files are served from /www/public.
+Files are served from /www/public (which can be overridden using NGINX_PUBLIC_OVERRIDE).
 
 ## Contents
 
@@ -34,7 +34,7 @@ Files are served from /www/public.
 | `NGINX_FORWARD_ACCESS_LOG` | 0 or 1 | If 1, the access log will be forwarded to Docker's stdout.                                                         | 0                  |
 | `NGINX_HEALTHCHECK_URI`    | URI    | The URI to load during the healthcheck.                                                                            | http://localhost   |
 | `NGINX_IGNORE_FAVICON`     | 0 or 1 | If 1, a helper configuration file will contain a directive to return 204 (No Content) when a favicon is requested. | 1                  |
-| `NGINX_ROOT_OVERRIDE`      | string | If set, it will be used as the nginx root directory (which by default is /www).                                    | *blank*            |
+| `NGINX_PUBLIC_OVERRIDE`    | string | If set, it will be used as the nginx root directory (which by default is /www).                                    | *blank*            |
 
 ## Helper Functions
 
