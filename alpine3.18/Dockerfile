@@ -1,4 +1,4 @@
-FROM bfren/alpine-s6:alpine3.17-4.4.17
+FROM bfren/alpine-s6:alpine3.18-4.5.0
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-nginx"
 
@@ -16,7 +16,7 @@ ENV \
     NGINX_HEALTHCHECK_URI=http://localhost
 
 COPY ./overlay /
-COPY ./alpine3.17/overlay /
+COPY ./alpine3.18/overlay /
 
 RUN bf-install
 
