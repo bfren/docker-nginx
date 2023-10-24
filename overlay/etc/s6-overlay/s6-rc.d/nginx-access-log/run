@@ -1,15 +1,17 @@
-#!/command/with-contenv sh
+#!/usr/bin/nu
 
-set -euo pipefail
-export BF_E="${PWD##*/}/$(basename ${0})"
+use bf
+use bf-s6
+bf env load -x nginx-access-log
 
+# Forward nginx access log to Docker
+def main [...args] {
+    # if forwading is not enable, disable the service
+    if not (bf env check NGINX_FORWARD_ACCESS_LOG) {
+        bf-s6 svc down nginx-access-log
+        return
+    }
 
-#======================================================================================================================
-# Forward Nginx access log to Docker.
-#======================================================================================================================
-
-if [ "${BF_NGINX_FORWARD_ACCESS_LOG-}" = "1" ] ; then
-    bf-forward ${PWD##*/} /var/log/nginx/access.log
-else
-    bf-svc-down ${PWD##*/}
-fi
+    # forward the access log file to nginx
+    bf-s6 log forward nginx-access-log (bf env NGINX_ACCESS_LOG)
+}
