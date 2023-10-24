@@ -7,7 +7,10 @@ def main [] {
     bf env set NGINX_ETC $etc
     bf env set NGINX_ETC_HELPERS $"($etc)/helpers"
     bf env set NGINX_ETC_MODULES $"($etc)/modules"
-    bf env set NGINX_LOCALHOST_CONF $"($etc)/sites/localhost.conf"
+
+    let sites = $"($etc)/sites"
+    bf env set NGINX_ETC_SITES $sites
+    bf env set NGINX_LOCALHOST_CONF $"($sites)/localhost.conf"
 
     let log = "/var/log/nginx"
     bf env set NGINX_ACCESS_LOG $"($log)/access.log"
