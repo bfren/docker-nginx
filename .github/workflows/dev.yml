@@ -65,7 +65,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-dev
-            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}-dev
       -
         name: Build and push default
         id: docker_build_default
@@ -81,7 +81,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bfren/nginx:dev
-            bfren/nginx:${{ steps.version.outputs.contents }}-beta
+            bfren/nginx:${{ steps.version.outputs.contents }}-dev
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
