@@ -17,6 +17,9 @@ def main [] {
         $"nginx-mod-http-brotli=($version)"
     ]
 
+    # save nnbound version to build log
+    bf build add nginx $version
+
     # clear default nginx configuration and directories
     let conf_d = "/etc/nginx/conf.d"
     let http_d = "/etc/nginx/http.d"
