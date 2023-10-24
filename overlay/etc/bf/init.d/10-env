@@ -10,9 +10,9 @@ export BF_E=`basename ${0}`
 
 bf-env "NGINX_LIB" "${BF_LIB}/nginx"
 
-NGINX_WWW=/www
-bf-env "NGINX_WWW" "${NGINX_WWW}"
-bf-env "NGINX_PUBLIC" "${NGINX_PUBLIC_OVERRIDE:-${NGINX_WWW}/public}"
-bf-env "NGINX_HELPERS" "/etc/nginx/helpers"
-bf-env "NGINX_MODULES" "/etc/nginx/modules"
-bf-env "NGINX_LOCALHOST_CONF" "/etc/nginx/sites/localhost.conf"
+BF_NGINX_WWW=/www
+bf-env "BF_NGINX_WWW" "${BF_NGINX_WWW}"
+bf-env "BF_NGINX_PUBLIC" "${BF_NGINX_PUBLIC_OVERRIDE:-${BF_NGINX_WWW}/public}"
+bf-env "BF_NGINX_HELPERS" "/etc/nginx/helpers"
+bf-env "BF_NGINX_MODULES" "/etc/nginx/modules"
+bf-env "BF_NGINX_LOCALHOST_CONF" "/etc/nginx/sites/localhost.conf"
