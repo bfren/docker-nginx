@@ -6,7 +6,7 @@ export def preflight [] {
     bf env load
 
     # manually set executing script
-    bf env set X nginx/run
+    bf env x_set --override run nginx
 
     # Test nginx configuration
     conf test
