@@ -1,6 +1,7 @@
 #!/usr/bin/nu
 
 use bf
+use bf-nginx
 bf env load -x
 
 # Reload Nginx - but only if it is running

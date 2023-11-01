@@ -19,5 +19,5 @@ export def main [] {
     #   -s  send a signal to the master process (reload: reload configuration, start new worker process, shut down old one)
     bf write "Reloading nginx." reload
     cont test
-    ^nginx -s reload
+    { ^nginx -s reload } | bf handle
 }
