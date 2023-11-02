@@ -18,7 +18,7 @@ def main [] {
     ]
 
     # save nnbound version to build log
-    bf build add nginx $version
+    bf build add Nginx $version
 
     # clear default nginx configuration and directories
     let conf_d = "/etc/nginx/conf.d"
