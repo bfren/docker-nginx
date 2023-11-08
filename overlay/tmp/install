@@ -38,4 +38,7 @@ def main [] {
     let localhost = "/var/www/localhost"
     bf write $"Linking ($public) to ($localhost)."
     ln -s $public $localhost
+
+    # add bf-nginx module to config
+    bf config use bf-nginx
 }
