@@ -4,5 +4,5 @@ use bf
 use bf-nginx
 bf env load -x
 
-# Reload Nginx - but only if it is running
+# Reload Nginx
 def main [] { bf-nginx reload }
