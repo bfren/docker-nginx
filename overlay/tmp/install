@@ -17,7 +17,7 @@ def main [] {
         $"nginx-mod-http-brotli=($version)"
     ]
 
-    # save nnbound version to build log
+    # save nginx version to build log
     bf build add Nginx $version
 
     # clear default nginx configuration and directories
@@ -34,10 +34,11 @@ def main [] {
     ln -s $http_d $conf_d # older builds of Nginx use conf.d instead of http.d
 
     # link root directory
-    let public = "/www/public"
+    bf write "Linking www directories."
+    let www = "/www"
     let localhost = "/var/www/localhost"
-    bf write $"Linking ($public) to ($localhost)."
-    ln -s $public $localhost
+    bf write $"Linking ($www) to ($localhost)."
+    ln -s $www $localhost
 
     # add bf-nginx module to config
     bf config use bf-nginx
