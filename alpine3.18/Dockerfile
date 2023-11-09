@@ -7,6 +7,9 @@ ARG BF_VERSION
 
 EXPOSE 80
 
+COPY ./overlay /
+COPY ./alpine3.18/overlay /
+
 ENV \
     # set to 0 to enable favicons - otherwise 204 (No Content) will always be returned
     BF_NGINX_IGNORE_FAVICON=1 \
@@ -14,9 +17,6 @@ ENV \
     BF_NGINX_FORWARD_ACCESS_LOG=0 \
     # URI to load for healthcheck
     BF_NGINX_HEALTHCHECK_URI=http://localhost
-
-COPY ./overlay /
-COPY ./alpine3.18/overlay /
 
 RUN bf-install
 
