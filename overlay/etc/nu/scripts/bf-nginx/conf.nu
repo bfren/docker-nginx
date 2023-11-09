@@ -1,4 +1,7 @@
 use bf
 
 # Test nginx configuration
-export def test [] { { ^nginx -qt } | bf handle -s {|x| bf write ok "OK." conf/test } conf/test }
+export def test [] {
+    let ok = { bf write ok "Configuration OK." conf/test }
+    { ^nginx -qt } | bf handle -s $ok conf/test
+}
