@@ -9,7 +9,7 @@ def main [] {
 
     # get nginx version and install with dependencies
     cd /tmp
-    let version = bf fs read ./NGINX_BUILD
+    let version = bf fs read NGINX_BUILD
     bf write $"Installing nginx v($version)."
     bf pkg install [
         "ca-certificates"
