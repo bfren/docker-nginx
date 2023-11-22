@@ -1,17 +1,17 @@
-#!/command/with-contenv sh
+#!/usr/bin/nu
 
-set -euo pipefail
-export BF_E="${PWD##*/}/$(basename ${0})"
+use bf
+use bf-s6
+bf env load -x nginx
 
+# Show helpful log message
+def main [...args] {
+    # ensure nginx is closed gracefully
+    # Flags:
+    #   -s  send a signal to the master process (quit: shut down server gracefully)
+    bf write debug "Quitting nginx."
+    ^nginx -s quit
 
-#======================================================================================================================
-# Ensure Nginx is closed gracefully and use base executable to terminate all services.
-#
-# Nginx flags
-#   -s  send a signal to the master process (quit: shut down server gracefully)
-#======================================================================================================================
-
-bf-debug "Quitting Nginx." "${BF_E}"
-nginx -s quit
-
-bf-svc-finish -t
+    # finish and terminate container
+    bf-s6 svc finish --terminate
+}
