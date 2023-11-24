@@ -92,7 +92,6 @@ jobs:
       -
         name: Build and push default (all Nginx versions)
         id: docker_build_default_all
-        if: matrix.alpine == '3.13' || matrix.alpine == '3.15' || matrix.alpine == '3.17' || matrix.alpine == '3.18'
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -112,7 +111,7 @@ jobs:
       -
         name: Build and push default (latest)
         id: docker_build_default_latest
-        if: matrix.alpine == '3.17'
+        if: matrix.alpine == '3.18'
         uses: docker/build-push-action@v5
         with:
           context: .
