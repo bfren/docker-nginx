@@ -6,13 +6,10 @@ on:
     tags-ignore: ['**']
   workflow_dispatch:
 
+env:
+  TEST_TAG: bfren/alpine:test
+
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout code
-        uses: actions/checkout@v4
   build:
     strategy:
       fail-fast: false
@@ -52,6 +49,29 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
+        name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Build and export
+        id: docker_export
+        uses: docker/build-push-action@v5
+        with:
+          file: ./${{ matrix.alpine }}/Dockerfile
+          build-args: |
+            BF_IMAGE=${{ env.REPOSITORY_NAME }}
+            BF_VERSION=${{ steps.version.outputs.contents }}
+          load: true
+          tags: ${{ env.TEST_TAG }}
+      -
+        name: Run tests
+        id: docker_test
+        run: |
+          docker run --rm ${{ env.TEST_TAG }} env -i nu -c "use bf test ; test"
+      -
         name: Build and push
         id: docker_build
         uses: docker/build-push-action@v5
@@ -66,6 +86,8 @@ jobs:
           tags: |
             bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-dev
             bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}-dev
+            ghcr.io/bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-dev
+            ghcr.io/bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}-dev
       -
         name: Build and push default
         id: docker_build_default
@@ -82,6 +104,8 @@ jobs:
           tags: |
             bfren/nginx:dev
             bfren/nginx:${{ steps.version.outputs.contents }}-dev
+            ghcr.io/bfren/nginx:dev
+            ghcr.io/bfren/nginx:${{ steps.version.outputs.contents }}-dev
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
