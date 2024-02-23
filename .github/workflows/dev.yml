@@ -60,7 +60,7 @@ jobs:
         id: docker_export
         uses: docker/build-push-action@v5
         with:
-          file: ./${{ matrix.alpine }}/Dockerfile
+          file: ./alpine${{ matrix.alpine }}/Dockerfile
           build-args: |
             BF_IMAGE=${{ env.REPOSITORY_NAME }}
             BF_VERSION=${{ steps.version.outputs.contents }}
