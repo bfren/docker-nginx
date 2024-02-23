@@ -8,7 +8,7 @@ docker buildx build \
     --build-arg BF_IMAGE=nginx \
     --build-arg BF_VERSION=${IMAGE} \
     -f alpine${ALPINE}/Dockerfile \
-    -t nginx-alpine${ALPINE}-dev \
+    -t nginx-alpine${ALPINE}-test \
     . \
     && \
-    docker run -it -e BF_DEBUG=1 nginx-alpine${ALPINE}-dev sh
+    docker run --rm nginx-alpine${ALPINE}-test env -i nu -c "use bf test ; test"
