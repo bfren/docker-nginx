@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  TEST_TAG: bfren/alpine:test
+  TEST_TAG: bfren/nginx:test
 
 jobs:
   build:
@@ -70,7 +70,7 @@ jobs:
         name: Run tests
         id: docker_test
         run: |
-          docker run --rm ${{ env.TEST_TAG }} env -i nu -c "use bf test ; test"
+          docker run --entrypoint "/usr/bin/env" ${{ env.TEST_TAG }} -i nu -c "use bf test ; test"
       -
         name: Build and push
         id: docker_build
