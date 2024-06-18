@@ -4,4 +4,4 @@ use bf
 bf env load -x
 
 # Attempt to load localhost
-def main [] { bf http test_url $"(bf env NGINX_HEALTHCHECK_URI)" | if not $in { exit 1 } }
+def main [] { bf env NGINX_HEALTHCHECK_URI | bf http test | if not $in { exit 1 } }
