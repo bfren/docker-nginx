@@ -1,4 +1,4 @@
-FROM bfren/alpine-s6:alpine3.15-5.3.1
+FROM bfren/alpine-s6:alpine3.15-5.4.1
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-nginx"
 
