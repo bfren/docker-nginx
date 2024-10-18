@@ -24,7 +24,7 @@ def main [] {
     let conf_d = "/etc/nginx/conf.d"
     let http_d = "/etc/nginx/http.d"
     bf write "Cleaning up default nginx configuration and files."
-    bf del force $conf_d $http_d "/var/www/*"
+    rm --force --recursive $conf_d $http_d /var/www/*
 
     # create nginx directories
     bf write "Creating nginx directories."
