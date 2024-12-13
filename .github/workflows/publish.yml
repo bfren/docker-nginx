@@ -96,34 +96,8 @@ jobs:
             ghcr.io/bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-alpine${{ matrix.alpine }}
             ghcr.io/bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-alpine${{ matrix.alpine }}-${{ steps.version.outputs.contents }}
       -
-        name: Build and push default (all Nginx versions)
-        id: docker_build_default_all
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./alpine${{ matrix.alpine }}/Dockerfile
-          build-args: |
-            BF_IMAGE=${{ env.REPOSITORY_NAME }}
-            BF_PUBLISHING=1
-            BF_VERSION=${{ steps.version.outputs.contents }}
-          push: true
-          platforms: linux/amd64,linux/arm/v7,linux/arm64
-          tags: |
-            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version_major.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version_minor.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
-            bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version_major.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version_minor.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx${{ steps.nginx_minor.outputs.contents }}-${{ steps.version.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}
-            ghcr.io/bfren/nginx:nginx${{ steps.nginx_revision.outputs.contents }}-${{ steps.version.outputs.contents }}
-      -
-        name: Build and push default (latest)
-        id: docker_build_default_latest
+        name: Build and push default
+        id: docker_build_default
         if: matrix.alpine == '3.21'
         uses: docker/build-push-action@v6
         with:
