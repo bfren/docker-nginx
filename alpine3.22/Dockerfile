@@ -1,4 +1,4 @@
-FROM ghcr.io/bfren/alpine-s6:alpine3.18-5.6.0
+FROM ghcr.io/bfren/alpine-s6:alpine3.22-5.6.0
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-nginx"
 
@@ -9,7 +9,7 @@ ARG BF_VERSION
 EXPOSE 80
 
 COPY ./overlay /
-COPY ./alpine3.18/overlay /
+COPY ./alpine3.22/overlay /
 
 ENV \
     # set to 0 to enable favicons - otherwise 204 (No Content) will always be returned
