@@ -1,5 +1,5 @@
 use bf
-use conf.nu
+use bf-nginx/conf
 
 export def preflight [] {
     # load environment

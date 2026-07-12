@@ -1,3 +1,3 @@
-export module conf.nu
-export module reload.nu
-export module run.nu
+export use bf-nginx/conf
+export use bf-nginx/reload
+export use bf-nginx/run
