@@ -1,5 +1,5 @@
 use bf
-use conf.nu
+use bf-nginx/conf
 
 # Reload Nginx - but only if it is running
 export def main [] {
