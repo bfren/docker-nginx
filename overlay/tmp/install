@@ -41,5 +41,5 @@ def main [] {
     ln -s $www $localhost
 
     # add bf-nginx module to config
-    bf config use bf-nginx
+    bf config use_mod bf-nginx
 }
