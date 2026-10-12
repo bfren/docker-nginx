@@ -1,21 +1,25 @@
-#!/bin/withenv sh
+#!/usr/bin/nu
 
-set -euo pipefail
+use bf
+use bf-nginx [conf]
+use bf-s6
+bf env load
 
+# Start nginx as a foreground service
+def main [
+    name: string    # The service name, passed by s6-supervise
+] {
+    # set executable name - used to make log output more useful
+    bf env x_set --override run $name
 
-#======================================================================================================================
-# Run preflight checks
-#======================================================================================================================
+    # run checks before executing service
+    conf test
 
-nu -c "use bf-nginx run ; run preflight"
-
-
-#======================================================================================================================
-# Start Nginx as a foreground service
-# From https://github.com/just-containers/nginx-loadbalancer/blob/master/rootfs/etc/services.d/nginx/run
-#
-# Flags:
-#   -g  set global configuration directive, in this case turn daemon mode off so it runs as a foreground service
-#======================================================================================================================
-
-exec nginx -g "daemon off;" > /dev/null 2>&1 # send to /dev/null because the log forwarder will show any startup errors
+    # flags:
+    #   -g  set global configuration directive, in this case turn daemon mode off so it runs as a foreground service
+    bf write "Starting nginx in foreground mode."
+    let args = [
+        "-g" "daemon off;"
+    ]
+    bf-s6 svc launch nginx ...$args
+}
