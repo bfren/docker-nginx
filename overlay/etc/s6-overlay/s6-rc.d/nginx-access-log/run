@@ -2,16 +2,21 @@
 
 use bf
 use bf-s6
-bf env load -x nginx-access-log
+bf env load
 
 # Forward nginx access log to Docker
-def main [...args] {
-    # if forwading is not enable, disable the service
+def main [
+    name: string    # The service name, passed by s6-supervise
+] {
+    # set executable name - used to make log output more useful
+    bf env x_set --override run $name
+
+    # run checks before executing service
     if not (bf env check NGINX_FORWARD_ACCESS_LOG) {
-        bf-s6 svc down nginx-access-log
+        bf-s6 svc down $name
         return
     }
 
-    # forward the access log file to nginx
-    bf-s6 log forward nginx-access-log (bf env NGINX_ACCESS_LOG)
+    # forward the log file to Docker
+    bf-s6 log forward $name (bf env NGINX_ACCESS_LOG)
 }

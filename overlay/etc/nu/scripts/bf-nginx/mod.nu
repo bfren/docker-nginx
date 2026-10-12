@@ -1,3 +1,2 @@
-export module conf.nu
-export module reload.nu
-export module run.nu
+export use conf.nu
+export use reload.nu
