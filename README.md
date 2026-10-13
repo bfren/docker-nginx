@@ -170,7 +170,7 @@ docker exec <container> nginx-reload
 
 ### Health check
 
-`healthcheck` loads `BF_NGINX_HEALTHCHECK_URI` and passes if the HTTP status is between 200 and 399. Docker runs it every minute. Use another URI for sites where `/` isn't a good test - for example, [WordPress](https://github.com/bfren/docker-wordpress) uses its login page.
+`healthcheck` loads `BF_NGINX_HEALTHCHECK_URI` and passes if the HTTP status is between 200 and 399. Docker runs it every 30 seconds (every 2 seconds during the first 60 seconds, so a new container reports healthy quickly). Use another URI for sites where `/` isn't a good test - for example, [WordPress](https://github.com/bfren/docker-wordpress) uses its login page.
 
 ### The `bf-nginx` module
 
