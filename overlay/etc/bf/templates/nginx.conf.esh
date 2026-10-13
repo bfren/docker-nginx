@@ -54,8 +54,10 @@ http {
 
     gzip                            on;
     gzip_vary                       on;
+    gzip_static                     on;
     gzip_proxied                    any;
     gzip_comp_level                 6;
+    gzip_min_length                 256;
     gzip_buffers                    16 8k;
     gzip_http_version               1.1;
     gzip_types                      application/atom+xml application/javascript application/json application/rss+xml
@@ -66,12 +68,26 @@ http {
 
     brotli                          on;
     brotli_comp_level               6;
+    brotli_min_length               256;
     brotli_static                   on;
     brotli_types                    application/atom+xml application/javascript application/json application/rss+xml
                                     application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype
                                     application/x-font-ttf application/x-javascript application/xhtml+xml application/xml
                                     font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon
                                     image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
+
+
+    # zstd is only available on Alpine 3.20 and above - the directives are only added if the module is installed
+    <% if apk info -e nginx-mod-http-zstd > /dev/null ; then -%>
+    zstd                            on;
+    zstd_comp_level                 3;
+    zstd_min_length                 256;
+    zstd_types                      application/atom+xml application/javascript application/json application/rss+xml
+                                    application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype
+                                    application/x-font-ttf application/x-javascript application/xhtml+xml application/xml
+                                    font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon
+                                    image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
+    <% fi -%>
 
 
     #======================================================================================================================
