@@ -1,4 +1,5 @@
 use bf
+use bf-s6
 bf env load
 
 # Ensure the public directory exists
@@ -15,7 +16,7 @@ def main [] {
     bf write $"Creating ($public)."
     mkdir $public
     cp $"(bf env ETC_SRC)/index.html" $public
-    bf ch apply_file "11-nginx-www"
+    bf-s6 ch apply_file "11-nginx-www"
 
     # return nothing
     return

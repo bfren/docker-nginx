@@ -5,8 +5,9 @@ use conf.nu
 export def main [] {
     # get the pid of the nginx process
     # if the pid is empty, nginx is not running
-    let pid = ^pidof nginx
-    if $pid == "" {
+    # (pidof exits with 1 when no process is found, so errors are ignored)
+    let pid = { ^pidof nginx } | bf handle --ignore-error
+    if ($pid | is-empty) {
         bf write debug "Nginx is not running." reload
         return
     }
