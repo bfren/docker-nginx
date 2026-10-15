@@ -198,7 +198,7 @@ Put site configuration in `overlay/etc/nginx/sites`, extra settings in `overlay/
 ./test.sh        # builds the image and runs /test
 ```
 
-This image has no tests of its own. `/test` runs the checks inherited from the base images, and fails if tests don't execute.
+`/test` runs this image's tests - the configuration check, the generated `nginx.conf` (compression settings, and zstd only where the module is installed) and `nginx-reload` - alongside the base images' tests, and fails if tests don't execute. Run it on more than one Alpine version, e.g. `./test.sh 3.19` and `./test.sh 3.24`, as zstd is only installed from 3.20.
 
 ## Troubleshooting
 
