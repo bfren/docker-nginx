@@ -17,6 +17,17 @@ def main [] {
         $"nginx-mod-http-brotli=($version)"
     ]
 
+    # install the zstd module if this version of Alpine has it (it was added in Alpine 3.20)
+    # use a simulated install rather than `apk search`, which also finds packages in tagged repositories (e.g. edge)
+    # that cannot be installed alongside this version of nginx
+    let zstd = $"nginx-mod-http-zstd=($version)"
+    if (({ ^apk --no-cache add --simulate $zstd } | bf handle --code-only) == 0) {
+        bf write "Installing nginx zstd module."
+        bf pkg install [ $zstd ]
+    } else {
+        bf write warn "The nginx zstd module is not available for this version of Alpine."
+    }
+
     # save nginx version to build log
     bf build add Nginx $version
 
