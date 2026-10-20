@@ -30,7 +30,7 @@ Or with Docker Compose:
 ```yaml
 services:
   web:
-    image: quay.io/bfren/nginx:nginx1.30-alpine3.24-7.2
+    image: quay.io/bfren/nginx:nginx1.30-alpine3.24-7.3
     ports:
       - "8080:80"
     volumes:
@@ -52,17 +52,17 @@ Open `http://localhost:8080`. If you don't mount anything, nginx serves a "Welco
 
 ## Tags
 
-Images are published to Docker Hub (`bfren/nginx`) and Quay.io (`quay.io/bfren/nginx`). Tags include the nginx version, because the version depends on the Alpine release.
+Images are published to Docker Hub (`bfren/nginx`) and Quay.io (`quay.io/bfren/nginx`) for `linux/amd64`, `linux/arm/v7` and `linux/arm64`. Tags include the nginx version, because the version depends on the Alpine release.
 
 | Tag                            | Example                        | Use when                                                  |
 | ------------------------------ | ------------------------------ | --------------------------------------------------------- |
 | `nginxX.Y-alpineA.B`           | `nginx1.30-alpine3.24`         | You want the latest image for an nginx and Alpine version |
 | `nginxX.Y-alpineA.B-MAJOR`     | `nginx1.30-alpine3.24-7`       | You want updates, but not breaking changes                |
-| `nginxX.Y-alpineA.B-MINOR`     | `nginx1.30-alpine3.24-7.2`     | You want fixes only - **recommended for building on**     |
-| `nginxX.Y-alpineA.B-VERSION`   | `nginx1.30-alpine3.24-7.2.6`   | You want to pin this image exactly                        |
+| `nginxX.Y-alpineA.B-MINOR`     | `nginx1.30-alpine3.24-7.3`     | You want fixes only - **recommended for building on**     |
+| `nginxX.Y-alpineA.B-VERSION`   | `nginx1.30-alpine3.24-7.3.0`   | You want to pin this image exactly                        |
 | `nginxX.Y.Z-alpineA.B`         | `nginx1.30.4-alpine3.24`       | You want an exact nginx release                           |
-| `nginxX.Y.Z-alpineA.B-VERSION` | `nginx1.30.4-alpine3.24-7.2.6` | You want to pin both                                      |
-| `latest`, `7`, `7.2`, `7.2.6`  |                                | As above, on the newest Alpine version                    |
+| `nginxX.Y.Z-alpineA.B-VERSION` | `nginx1.30.4-alpine3.24-7.3.0` | You want to pin both                                      |
+| `latest`, `7`, `7.3`, `7.3.0`  |                                | As above, on the newest Alpine version                    |
 | `nginxX.Y`, `nginxX.Y.Z`       | `nginx1.30`, `nginx1.30.4`     | As above, on the newest Alpine version                    |
 
 | Alpine | nginx | Alpine security support ends |
@@ -179,12 +179,12 @@ docker exec <container> nginx-reload
 | `bf-nginx conf test` | Test the nginx configuration and report whether it is valid.       |
 | `bf-nginx reload`    | Test the configuration, then reload nginx - only if it is running. |
 
-Load it with `use bf-nginx`. The executables `nginx-reload` and `healthcheck` (also `bf-healthcheck`) are in `/usr/bin/bf` and on the `PATH`.
+Load it with `use bf-nginx`. The executables `nginx-reload` and `bf-healthcheck` are in `/usr/bin/bf` and on the `PATH`, and `bf-healthcheck` is also available as `healthcheck`.
 
 ## Building on this image
 
 ```dockerfile
-FROM quay.io/bfren/nginx:nginx1.30-alpine3.24-7.2
+FROM quay.io/bfren/nginx:nginx1.30-alpine3.24-7.3
 
 COPY ./overlay /
 RUN bf-install
