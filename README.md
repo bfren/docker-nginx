@@ -170,7 +170,7 @@ docker exec <container> nginx-reload
 
 ### Health check
 
-`healthcheck` loads `BF_NGINX_HEALTHCHECK_URI` and passes if the HTTP status is between 200 and 399. Docker runs it every 30 seconds (every 2 seconds during the first 60 seconds, so a new container reports healthy quickly). Use another URI for sites where `/` isn't a good test - for example, [WordPress](https://github.com/bfren/docker-wordpress) uses its login page.
+The health check (`/etc/bf/health.d/10-nginx.nu`) loads `BF_NGINX_HEALTHCHECK_URI` and passes if the HTTP status is between 200 and 399. Docker runs it every 30 seconds (every 2 seconds during the first 60 seconds, so a new container reports healthy quickly). Use another URI for sites where `/` isn't a good test - for example, [WordPress](https://github.com/bfren/docker-wordpress) uses its login page.
 
 ### The `bf-nginx` module
 
@@ -179,7 +179,7 @@ docker exec <container> nginx-reload
 | `bf-nginx conf test` | Test the nginx configuration and report whether it is valid.       |
 | `bf-nginx reload`    | Test the configuration, then reload nginx - only if it is running. |
 
-Load it with `use bf-nginx`. The executables `nginx-reload` and `bf-healthcheck` are in `/usr/bin/bf` and on the `PATH`, and `bf-healthcheck` is also available as `healthcheck`.
+Load it with `use bf-nginx`. The executable `nginx-reload` is in `/usr/bin/bf` and on the `PATH`.
 
 ## Building on this image
 
@@ -190,7 +190,7 @@ COPY ./overlay /
 RUN bf-install
 ```
 
-Put site configuration in `overlay/etc/nginx/sites`, extra settings in `overlay/etc/nginx/http.d` and `overlay/etc/nginx/custom`, and any installation steps in `overlay/tmp/install`. Replace `overlay/usr/bin/bf/bf-healthcheck` to change the health check. See [Alpine](https://github.com/bfren/docker-alpine) and [Alpine + S6](https://github.com/bfren/docker-alpine-s6) for everything else.
+Put site configuration in `overlay/etc/nginx/sites`, extra settings in `overlay/etc/nginx/http.d` and `overlay/etc/nginx/custom`, and any installation steps in `overlay/tmp/install`. Add a script to `overlay/etc/bf/health.d` to check your own service as well as Nginx, or replace `overlay/etc/bf/health.d/10-nginx.nu` to change Nginx's check. See [Alpine](https://github.com/bfren/docker-alpine) and [Alpine + S6](https://github.com/bfren/docker-alpine-s6) for everything else.
 
 ## Testing
 
@@ -221,7 +221,7 @@ Set `BF_NGINX_FORWARD_ACCESS_LOG=1`. They are always written to `/var/log/nginx/
 
 ### The health check fails
 
-The URI in `BF_NGINX_HEALTHCHECK_URI` must return a 2xx or 3xx status from inside the container. Test it with `docker exec <container> healthcheck`.
+The URI in `BF_NGINX_HEALTHCHECK_URI` must return a 2xx or 3xx status from inside the container. Test it with `docker exec <container> bf-healthcheck`.
 
 ## FAQs
 
