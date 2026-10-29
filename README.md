@@ -41,7 +41,7 @@ Open `http://localhost:8080`. If you don't mount anything, nginx serves a "Welco
 
 ## Features
 
-* 🪶 Alpine 3.15 to 3.24, each with its own nginx version - choose with the image tag
+* 🪶 Alpine 3.20 to 3.24, each with its own nginx version - choose with the image tag
 * 🗜️ zstd (Alpine 3.20 and above), Brotli and gzip compression, with pre-compressed `.gz` and `.br` files served as they are
 * 🔒 `server_tokens off`, and nginx workers run as a non-root `www` user
 * 🧩 Include-based configuration: add your own sites, server snippets, modules and `http` settings without replacing `nginx.conf`
@@ -72,11 +72,6 @@ Images are published to Docker Hub (`bfren/nginx`) and Quay.io (`quay.io/bfren/n
 | 3.22   | 1.28  | 2027-05-01                   |
 | 3.21   | 1.26  | 2026-11-01                   |
 | 3.20   | 1.26  | ended 2026-04-01             |
-| 3.19   | 1.24  | ended 2025-11-01             |
-| 3.18   | 1.24  | ended 2025-05-09             |
-| 3.17   | 1.22  | ended 2024-11-22             |
-| 3.16   | 1.22  | ended 2024-05-23             |
-| 3.15   | 1.20  | ended 2023-11-01             |
 
 Images for unsupported Alpine versions are still built, but no longer receive Alpine security fixes - avoid them for anything new.
 
@@ -152,7 +147,7 @@ Include these in a `server` block with `include helpers/<name>;` (the path is re
 
 ### Compression
 
-Text responses are compressed with zstd, Brotli or gzip, depending on what the browser accepts. This happens on the fly for every request - nginx doesn't cache the compressed result. zstd is only installed on Alpine 3.20 and above, because older releases don't have the module; there, responses use Brotli or gzip. Compression levels are 6 for gzip and Brotli, and 3 for zstd. Responses smaller than 256 bytes are not compressed. Only gzip and Brotli have pre-compressed file support (below); zstd is always compressed on the fly.
+Text responses are compressed with zstd, Brotli or gzip, depending on what the browser accepts. This happens on the fly for every request - nginx doesn't cache the compressed result. Compression levels are 6 for gzip and Brotli, and 3 for zstd. Responses smaller than 256 bytes are not compressed. Only gzip and Brotli have pre-compressed file support (below); zstd is always compressed on the fly.
 
 To avoid that cost for static files, compress them when you build your site: put a `.br` (`brotli -k -q 11 file`) and/or a `.gz` (`gzip -k -9 file`) next to each file, and nginx serves them directly. `brotli_static` and `gzip_static` are both on, and they only take effect when a pre-compressed file exists.
 
@@ -199,7 +194,7 @@ Put site configuration in `overlay/etc/nginx/sites`, extra settings in `overlay/
 ./test.nu --all  # every version, in parallel
 ```
 
-`/test` runs this image's tests - the configuration check, the generated `nginx.conf` (compression settings, and zstd only where the module is installed) and `nginx-reload` - alongside the base images' tests, and fails if tests don't execute. Run it on more than one Alpine version, e.g. `./test.nu 3.19` and `./test.nu 3.24`, as zstd is only installed from 3.20.
+`/test` runs this image's tests - the configuration check, the generated `nginx.conf` (compression settings) and `nginx-reload` - alongside the base images' tests, and fails if tests don't execute. Run it on more than one Alpine version, e.g. `./test.nu 3.20` and `./test.nu 3.24`.
 
 ## Troubleshooting
 
