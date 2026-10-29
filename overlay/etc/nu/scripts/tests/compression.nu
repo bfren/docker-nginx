@@ -21,25 +21,15 @@ def render []: nothing -> record<dir: string, conf: string> {
     {dir: $dir, conf: $conf}
 }
 
-# Returns true if the zstd module is installed (it is not available on Alpine 3.19 and earlier)
-def has_zstd []: nothing -> bool {
-    (^apk info -e nginx-mod-http-zstd | complete | get exit_code) == 0
-}
-
-# Returns true if this version of Alpine has the zstd module in its own repositories (3.20 and above)
-def alpine_has_zstd []: nothing -> bool {
-    let v = open --raw /etc/alpine-release | str trim | split row "." | first 2 | into int
-    $v.0 > 3 or ($v.0 == 3 and $v.1 >= 20)
-}
-
 
 #======================================================================================================================
 # install
 #======================================================================================================================
 
-export def install__adds_zstd_module_only_on_alpine_3_20_and_above [] {
-    # catches /tmp/install silently skipping the module (or installing one from another repository)
-    assert equal (alpine_has_zstd) (has_zstd) "the zstd module should be installed if, and only if, Alpine is 3.20 or above"
+export def install__adds_zstd_module [] {
+    let result = ^apk info -e nginx-mod-http-zstd | complete
+
+    assert equal 0 $result.exit_code "the zstd module is not installed"
 }
 
 
@@ -69,12 +59,10 @@ export def generated__enables_static_gzip_and_brotli [] {
     assert ($conf =~ 'brotli_static\s+on;') "brotli_static is not on"
 }
 
-export def generated__includes_zstd_only_when_module_is_installed [] {
+export def generated__sets_minimum_length_for_zstd [] {
     let conf = render | get conf | open --raw $in
 
-    let has_directives = $conf =~ 'zstd_min_length\s+256;'
-
-    assert equal (has_zstd) $has_directives "zstd directives should be present if, and only if, the module is installed"
+    assert ($conf =~ 'zstd_min_length\s+256;') "zstd_min_length is missing"
 }
 
 

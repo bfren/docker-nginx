@@ -77,8 +77,6 @@ http {
                                     image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
 
 
-    # zstd is only available on Alpine 3.20 and above - the directives are only added if the module is installed
-    <% if apk info -e nginx-mod-http-zstd > /dev/null ; then -%>
     zstd                            on;
     zstd_comp_level                 3;
     zstd_min_length                 256;
@@ -87,7 +85,6 @@ http {
                                     application/x-font-ttf application/x-javascript application/xhtml+xml application/xml
                                     font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon
                                     image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
-    <% fi -%>
 
 
     #======================================================================================================================
