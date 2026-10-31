@@ -1,0 +1,44 @@
+name: build
+
+on:
+  push:
+    branches: ['**']
+    tags-ignore: ['**']
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: bfren/docker/.github/workflows/build.yml@shared-build
+    with:
+      image: nginx
+      folders: |
+        alpine3.20
+        alpine3.21
+        alpine3.22
+        alpine3.23
+        alpine3.24
+      platforms: |
+        linux/amd64
+        linux/arm/v7
+        linux/arm64
+      tags: |
+        nginx${NGINX_MINOR}-${FOLDER}
+        nginx${NGINX_MINOR}-${FOLDER}-${VERSION_MAJOR}
+        nginx${NGINX_MINOR}-${FOLDER}-${VERSION_MINOR}
+        nginx${NGINX_MINOR}-${FOLDER}-${VERSION}
+        nginx${NGINX_REVISION}-${FOLDER}
+        nginx${NGINX_REVISION}-${FOLDER}-${VERSION}
+      default-folder: "alpine3.24"
+      default-tags: |
+        latest
+        ${VERSION_MAJOR}
+        ${VERSION_MINOR}
+        ${VERSION}
+        nginx${NGINX_MINOR}
+        nginx${NGINX_REVISION}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      QUAY_TOKEN: ${{ secrets.QUAY_TOKEN }}

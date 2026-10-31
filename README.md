@@ -1,6 +1,6 @@
 # Nginx
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-nginx) ![Docker Pulls](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fpulls%2Fnginx) ![Docker Image Size](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fsize%2Fnginx) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bfren/docker-nginx/dev.yml?branch=main)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/bfren/docker-nginx) ![Docker Pulls](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fpulls%2Fnginx) ![Docker Image Size](https://img.shields.io/endpoint?url=https%3A%2F%2Fbfren.dev%2Fdocker%2Fsize%2Fnginx) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bfren/docker-nginx/build.yml?branch=main)
 
 [Docker Hub](https://hub.docker.com/r/bfren/nginx) - [Quay.io](https://quay.io/repository/bfren/nginx) - [bfren ecosystem](https://github.com/bfren/docker)
 
@@ -30,7 +30,7 @@ Or with Docker Compose:
 ```yaml
 services:
   web:
-    image: quay.io/bfren/nginx:nginx1.30-alpine3.24-7.3
+    image: quay.io/bfren/nginx:nginx1.30-alpine3.24-9.0
     ports:
       - "8080:80"
     volumes:
@@ -57,13 +57,13 @@ Images are published to Docker Hub (`bfren/nginx`) and Quay.io (`quay.io/bfren/n
 | Tag                            | Example                        | Use when                                                  |
 | ------------------------------ | ------------------------------ | --------------------------------------------------------- |
 | `nginxX.Y-alpineA.B`           | `nginx1.30-alpine3.24`         | You want the latest image for an nginx and Alpine version |
-| `nginxX.Y-alpineA.B-MAJOR`     | `nginx1.30-alpine3.24-7`       | You want updates, but not breaking changes                |
-| `nginxX.Y-alpineA.B-MINOR`     | `nginx1.30-alpine3.24-7.3`     | You want fixes only - **recommended for building on**     |
-| `nginxX.Y-alpineA.B-VERSION`   | `nginx1.30-alpine3.24-7.3.0`   | You want to pin this image exactly                        |
-| `nginxX.Y.Z-alpineA.B`         | `nginx1.30.4-alpine3.24`       | You want an exact nginx release                           |
-| `nginxX.Y.Z-alpineA.B-VERSION` | `nginx1.30.4-alpine3.24-7.3.0` | You want to pin both                                      |
-| `latest`, `7`, `7.3`, `7.3.0`  |                                | As above, on the newest Alpine version                    |
-| `nginxX.Y`, `nginxX.Y.Z`       | `nginx1.30`, `nginx1.30.4`     | As above, on the newest Alpine version                    |
+| `nginxX.Y-alpineA.B-MAJOR`     | `nginx1.30-alpine3.24-9`       | You want updates, but not breaking changes                |
+| `nginxX.Y-alpineA.B-MINOR`     | `nginx1.30-alpine3.24-9.0`     | You want fixes only - **recommended for building on**     |
+| `nginxX.Y-alpineA.B-VERSION`   | `nginx1.30-alpine3.24-9.0.0`   | You want to pin this image exactly                        |
+| `nginxX.Y.Z-alpineA.B`         | `nginx1.30.6-alpine3.24`       | You want an exact nginx release                           |
+| `nginxX.Y.Z-alpineA.B-VERSION` | `nginx1.30.6-alpine3.24-9.0.0` | You want to pin both                                      |
+| `latest`, `9`, `9.0`, `9.0.0`  |                                | As above, on the newest Alpine version                    |
+| `nginxX.Y`, `nginxX.Y.Z`       | `nginx1.30`, `nginx1.30.6`     | As above, on the newest Alpine version                    |
 
 | Alpine | nginx | Alpine security support ends |
 | ------ | ----- | ---------------------------- |
@@ -179,7 +179,7 @@ Load it with `use bf-nginx`. The executable `nginx-reload` is in `/usr/bin/bf` a
 ## Building on this image
 
 ```dockerfile
-FROM quay.io/bfren/nginx:nginx1.30-alpine3.24-7.3
+FROM quay.io/bfren/nginx:nginx1.30-alpine3.24-9.0
 
 COPY ./overlay /
 RUN bf-install
