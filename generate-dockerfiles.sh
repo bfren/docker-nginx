@@ -4,7 +4,7 @@ set -euo pipefail
 
 docker pull bfren/alpine
 
-BASE_VERSION="7.0.0"
+BASE_VERSION="7.0.1"
 echo "Base: ${BASE_VERSION}"
 
 ALPINE_EDITIONS="3.20 3.21 3.22 3.23 3.24"
@@ -26,5 +26,4 @@ for V in ${ALPINE_EDITIONS} ; do
 
 done
 
-docker system prune -f
 echo "Done."
