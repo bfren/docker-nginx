@@ -59,11 +59,11 @@ Images are published to Docker Hub (`bfren/nginx`) and Quay.io (`quay.io/bfren/n
 | `nginxX.Y-alpineA.B`           | `nginx1.30-alpine3.24`         | You want the latest image for an nginx and Alpine version |
 | `nginxX.Y-alpineA.B-MAJOR`     | `nginx1.30-alpine3.24-9`       | You want updates, but not breaking changes                |
 | `nginxX.Y-alpineA.B-MINOR`     | `nginx1.30-alpine3.24-9.0`     | You want fixes only - **recommended for building on**     |
-| `nginxX.Y-alpineA.B-VERSION`   | `nginx1.30-alpine3.24-9.0.2`   | You want to pin this image exactly                        |
-| `nginxX.Y.Z-alpineA.B`         | `nginx1.30.6-alpine3.24`       | You want an exact nginx release                           |
-| `nginxX.Y.Z-alpineA.B-VERSION` | `nginx1.30.6-alpine3.24-9.0.2` | You want to pin both                                      |
-| `latest`, `9`, `9.0`, `9.0.2`  |                                | As above, on the newest Alpine version                    |
-| `nginxX.Y`, `nginxX.Y.Z`       | `nginx1.30`, `nginx1.30.6`     | As above, on the newest Alpine version                    |
+| `nginxX.Y-alpineA.B-VERSION`   | `nginx1.30-alpine3.24-9.0.3`   | You want to pin this image exactly                        |
+| `nginxX.Y.Z-alpineA.B`         | `nginx1.30.7-alpine3.24`       | You want an exact nginx release                           |
+| `nginxX.Y.Z-alpineA.B-VERSION` | `nginx1.30.7-alpine3.24-9.0.3` | You want to pin both                                      |
+| `latest`, `9`, `9.0`, `9.0.3`  |                                | As above, on the newest Alpine version                    |
+| `nginxX.Y`, `nginxX.Y.Z`       | `nginx1.30`, `nginx1.30.7`     | As above, on the newest Alpine version                    |
 
 | Alpine | nginx | Alpine security support ends |
 | ------ | ----- | ---------------------------- |
