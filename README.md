@@ -67,6 +67,8 @@ Images are published to Docker Hub (`bfren/nginx`) and Quay.io (`quay.io/bfren/n
 | `latest`, `9`, `9.0`, `9.0.4`  |                                | As above, on the newest Alpine version                    |
 | `nginxX.Y`, `nginxX.Y.Z`       | `nginx1.30`, `nginx1.30.7`     | As above, on the newest Alpine version                    |
 
+A new `MAJOR` version means a breaking change. Before moving to one, read the [changelog](CHANGELOG.md), where each breaking change is marked **Breaking**.
+
 | Alpine | nginx | Alpine security support ends |
 | ------ | ----- | ---------------------------- |
 | 3.24   | 1.30  | 2028-06-01                   |
