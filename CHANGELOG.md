@@ -16,8 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README: the "Building on this image" Dockerfile was missing the `BF_IMAGE` and `BF_VERSION` build arguments,
   so `bf-install` failed when you followed it. The list of what to put where is now easier to follow.
 - README: the `docker run` example now uses the Quay.io image, like the rest of the examples.
-- The Alpine 3.21 and 3.23 images build again - they now install Alpine's nginx packages `1.26.3-r4` and `1.28.3-r9`,
-  which replaced `1.26.3-r3` and `1.28.3-r7`.
+- The Alpine 3.21, 3.22 and 3.23 images build again - they now install Alpine's nginx packages `1.26.3-r4` and
+  `1.28.3-r9`, which replaced `1.26.3-r3` and `1.28.3-r7`. Alpine 3.22 has not published `1.28.3-r9` for arm/v7 yet, so
+  that one image builds once it does.
 
 ## [9.0.3] - 2026-11-18
 
