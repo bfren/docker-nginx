@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [9.0.4] - Unreleased
+
+### Fixed
+
+- README: the "Building on this image" Dockerfile was missing the `BF_IMAGE` and `BF_VERSION` build arguments,
+  so `bf-install` failed when you followed it. The list of what to put where is now easier to follow.
+
 ## [9.0.3] - 2026-11-18
 
 ### Changed
@@ -38,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Images are built and published by the shared `bfren/docker` build workflow (`build.yml`), replacing the separate
   `dev.yml` and `publish.yml` workflows.
 
+[9.0.4]: https://github.com/bfren/docker-nginx/compare/v9.0.3...v9.0.4
 [9.0.3]: https://github.com/bfren/docker-nginx/compare/v9.0.2...v9.0.3
 [9.0.2]: https://github.com/bfren/docker-nginx/compare/v9.0.1...v9.0.2
 [9.0.1]: https://github.com/bfren/docker-nginx/compare/v9.0.0...v9.0.1

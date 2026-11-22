@@ -59,10 +59,10 @@ Images are published to Docker Hub (`bfren/nginx`) and Quay.io (`quay.io/bfren/n
 | `nginxX.Y-alpineA.B`           | `nginx1.30-alpine3.24`         | You want the latest image for an nginx and Alpine version |
 | `nginxX.Y-alpineA.B-MAJOR`     | `nginx1.30-alpine3.24-9`       | You want updates, but not breaking changes                |
 | `nginxX.Y-alpineA.B-MINOR`     | `nginx1.30-alpine3.24-9.0`     | You want fixes only - **recommended for building on**     |
-| `nginxX.Y-alpineA.B-VERSION`   | `nginx1.30-alpine3.24-9.0.3`   | You want to pin this image exactly                        |
+| `nginxX.Y-alpineA.B-VERSION`   | `nginx1.30-alpine3.24-9.0.4`   | You want to pin this image exactly                        |
 | `nginxX.Y.Z-alpineA.B`         | `nginx1.30.7-alpine3.24`       | You want an exact nginx release                           |
-| `nginxX.Y.Z-alpineA.B-VERSION` | `nginx1.30.7-alpine3.24-9.0.3` | You want to pin both                                      |
-| `latest`, `9`, `9.0`, `9.0.3`  |                                | As above, on the newest Alpine version                    |
+| `nginxX.Y.Z-alpineA.B-VERSION` | `nginx1.30.7-alpine3.24-9.0.4` | You want to pin both                                      |
+| `latest`, `9`, `9.0`, `9.0.4`  |                                | As above, on the newest Alpine version                    |
 | `nginxX.Y`, `nginxX.Y.Z`       | `nginx1.30`, `nginx1.30.7`     | As above, on the newest Alpine version                    |
 
 | Alpine | nginx | Alpine security support ends |
@@ -181,11 +181,22 @@ Load it with `use bf-nginx`. The executable `nginx-reload` is in `/usr/bin/bf` a
 ```dockerfile
 FROM quay.io/bfren/nginx:nginx1.30-alpine3.24-9.0
 
+# required by bf-install, which saves them as the image name and version
+ARG BF_IMAGE=my-image
+ARG BF_VERSION=1.0.0
+
 COPY ./overlay /
 RUN bf-install
 ```
 
-Put site configuration in `overlay/etc/nginx/sites`, extra settings in `overlay/etc/nginx/http.d` and `overlay/etc/nginx/custom`, and any installation steps in `overlay/tmp/install`. Add a script to `overlay/etc/bf/health.d` to check your own service as well as Nginx, or replace `overlay/etc/bf/health.d/10-nginx.nu` to change Nginx's check. See [Alpine](https://github.com/bfren/docker-alpine) and [Alpine + S6](https://github.com/bfren/docker-alpine-s6) for everything else.
+Everything in `overlay` is copied into the image. Put:
+
+* site configuration in `overlay/etc/nginx/sites`
+* extra settings in `overlay/etc/nginx/http.d` and `overlay/etc/nginx/custom` (see [Configuration files](#configuration-files))
+* any installation steps in `overlay/tmp/install`, which `bf-install` runs during the build
+* a script in `overlay/etc/bf/health.d` to check your own service as well as nginx - or replace `overlay/etc/bf/health.d/10-nginx.nu` to change nginx's check
+
+See [Alpine](https://github.com/bfren/docker-alpine) and [Alpine + S6](https://github.com/bfren/docker-alpine-s6) for everything else.
 
 ## Testing
 
