@@ -37,6 +37,8 @@ services:
       - ./site:/www/public
 ```
 
+This example is also in [`docker-compose.yml`](docker-compose.yml).
+
 Open `http://localhost:8080`. If you don't mount anything, nginx serves a "Welcome to Nginx" page.
 
 ## Features
