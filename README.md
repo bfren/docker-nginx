@@ -22,7 +22,7 @@ There is no SSL support - it is designed to run behind a reverse proxy such as [
 Serve the files in `./site` on port 8080:
 
 ```sh
-docker run -d --name web -p 8080:80 -v ./site:/www/public bfren/nginx
+docker run -d --name web -p 8080:80 -v ./site:/www/public quay.io/bfren/nginx
 ```
 
 Or with Docker Compose:
