@@ -1,0 +1,7 @@
+services:
+  web:
+    image: quay.io/bfren/nginx:nginx1.30-alpine3.24-9.0
+    ports:
+      - "8080:80"
+    volumes:
+      - ./site:/www/public
