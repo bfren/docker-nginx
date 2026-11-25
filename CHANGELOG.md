@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [9.0.4] - Unreleased
+## [9.0.4] - 2026-11-25
 
 ### Added
 
@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Base image updated to `bfren/alpine-s6` 7.0.3, which rebuilds BusyBox, figlet and Nushell without changing
+  their versions - see the [Alpine + S6 changelog](https://github.com/bfren/docker-alpine-s6/blob/main/CHANGELOG.md).
 - If Alpine has not yet published the pinned nginx build for an architecture, that image installs the newest build of
   the same nginx version instead of failing to build, and says so in the build output. For example, Alpine 3.22's
   arm/v7 image has `1.28.3-r7` until Alpine publishes `1.28.3-r9` for it. `bf build` shows the build installed.
